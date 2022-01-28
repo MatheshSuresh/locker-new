@@ -1,0 +1,221 @@
+.employee{
+    display: flex;
+    height: 100vh;
+    background-color: #292929;
+    color: #F2F3F2;
+  }
+
+.employee_Sidebar{
+    flex:2.5;
+    max-height: 100vh;
+    width: 150px;
+}
+
+.employee_Rightbar{
+    flex:9.5;
+}
+
+.employee_RightbarTop{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin:25px 30px 0 30px;
+    height: 113px;   
+}
+
+.employee_Icon{
+    height: 40px !important;
+    width: 40px !important;
+    color: #F2F3F2;
+    margin-left: 10px;
+}
+
+.employee_Heading{
+    color: #F2F3F2;
+    margin:0% 25% 0% 3% ;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.employee_search_Input{
+    width: 100%;
+    position: relative;
+    justify-content: center;
+    margin-left: 8%;
+}
+
+.employee_search_Inputfields{
+    padding:25px 40px;
+    margin-top: 10px;
+    border: none;
+    outline: none;
+    position : relative;
+    font-size: 15px;
+    color:rgb(192, 192, 192);
+    height: 50px;
+    width: 250%;
+    background: #292929;
+    border: 2.5px solid rgba(96, 108, 103, 0.5);
+    box-sizing: border-box;
+    box-shadow: 1px 1px 2px rgba(66, 66, 66, 0.3), -1px -1px 2px rgba(16, 16, 16, 0.5), inset -7px 7px 14px rgba(16, 16, 16, 0.2), inset 7px -7px 14px rgba(16, 16, 16, 0.2), inset -7px -7px 14px rgba(66, 66, 66, 0.9), inset 7px 7px 18px rgba(16, 16, 16, 0.9);
+    border-radius: 20px;
+}
+
+.employee_search_Icon{
+    position: absolute;
+    bottom:16px;
+    left: 8px;
+    color: rgb(192, 192, 192);
+}
+
+
+.employee_RightbarBottom{
+    display: flex;
+}
+
+.employee_RightbarBottomleft{
+    display: flex;
+    flex-direction: column;
+}
+
+.employee_lockerContainer{
+    width: 800px;
+    height: 300px;
+    background-color:#212926 ;
+    margin: 25px 0px 10px 120px;
+    box-shadow: 5px 5px 10px rgba(14, 17, 16, 0.2), -5px -5px 10px rgba(14, 17, 16, 0.2), 5px -5px 10px rgba(54, 67, 62, 0.9), -5px 5px 13px rgba(14, 17, 16, 0.9), inset -1px 1px 2px rgba(54, 67, 62, 0.3), inset 1px -1px 2px rgba(14, 17, 16, 0.5);
+    border-radius: 20px;
+}
+
+.employee_lockerContainertop{
+    display: flex;
+    align-items: center;
+    margin: 20px 30px;
+    justify-content: space-between;
+}
+
+.employee_lockerContainertop>h1{
+   font-weight: 600;
+}
+
+.employee_lockerContainer2_search_Input{
+    width: 100%;
+    position: relative;
+    justify-content: center;
+    margin-left: 8%;
+}
+
+.employee_lockerContainer2_search_Inputfields{
+    padding:10px 40px;
+    margin-top: 10px;
+    border: none;
+    outline: none;
+    position : relative;
+    font-size: 15px;
+    color:rgb(192, 192, 192);
+    height: 40px;
+    width: 90%;
+    background: #292929;
+    border: 2.5px solid rgba(96, 108, 103, 0.5);
+    box-sizing: border-box;
+    box-shadow: 1px 1px 2px rgba(66, 66, 66, 0.3), -1px -1px 2px rgba(16, 16, 16, 0.5), inset -7px 7px 14px rgba(16, 16, 16, 0.2), inset 7px -7px 14px rgba(16, 16, 16, 0.2), inset -7px -7px 14px rgba(66, 66, 66, 0.9), inset 7px 7px 18px rgba(16, 16, 16, 0.9);
+    border-radius: 20px;
+}
+
+.employee_lockerContainer2_search_Icon{
+    position: absolute;
+    bottom:7px;
+    left: 8px;
+    color: rgb(192, 192, 192);
+}
+
+
+.employee_lockerContainer2{
+    width: 600px;
+    height: 300px;
+    background-color:#212926 ;
+    margin: 25px 0px 10px 120px;
+    box-shadow: 5px 5px 10px rgba(14, 17, 16, 0.2), -5px -5px 10px rgba(14, 17, 16, 0.2), 5px -5px 10px rgba(54, 67, 62, 0.9), -5px 5px 13px rgba(14, 17, 16, 0.9), inset -1px 1px 2px rgba(54, 67, 62, 0.3), inset 1px -1px 2px rgba(14, 17, 16, 0.5);
+    border-radius: 20px;
+}
+
+.employee_lockerContainer2top{
+    display: flex;
+    align-items: center;
+    margin: 20px 30px;
+    justify-content: space-between;
+}
+
+.employee_lockerContainer2top>h1{
+   font-weight: 600;
+}
+
+.employee_lockerContainersearch{
+    width: 25rem;
+    height: 35px;
+    background: #292929;
+    border: 2.5px solid rgba(96, 108, 103, 0.5);
+    box-sizing: border-box;
+    box-shadow: 1px 1px 2px rgba(66, 66, 66, 0.3), -1px -1px 2px rgba(16, 16, 16, 0.5), inset -7px 7px 14px rgba(16, 16, 16, 0.2), inset 7px -7px 14px rgba(16, 16, 16, 0.2), inset -7px -7px 14px rgba(66, 66, 66, 0.9), inset 7px 7px 18px rgba(16, 16, 16, 0.9);
+    border-radius: 10px;
+
+}
+
+.employee_lockerContainer>hr{
+    margin: 0px 30px;
+    border-color: rgb(1, 99, 1);
+    border-top:none ;
+}
+
+.employee_lockerInfo{
+    width: 350px;
+    height: 720px;
+    background-color:#212926 ;
+    margin: 0px 0px 10px 120px;
+    box-shadow: 5px 5px 10px rgba(14, 17, 16, 0.2), -5px -5px 10px rgba(14, 17, 16, 0.2), 5px -5px 10px rgba(54, 67, 62, 0.9), -5px 5px 13px rgba(14, 17, 16, 0.9), inset -1px 1px 2px rgba(54, 67, 62, 0.3), inset 1px -1px 2px rgba(14, 17, 16, 0.5);
+    border-radius: 20px;  
+}
+
+.employee_lockerInfotop{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.employee_lockerInfotop>h3{
+    margin-top:20px;
+    border-bottom: 1px solid green;
+}
+
+.employee_profileImg{
+    width: 8rem;
+    height: 8rem;
+    margin: 20px 0px 0px 0px;
+}
+
+.employee_Form{
+    display: flex;
+    height: 63%;
+    flex-direction: column;
+    margin: 0px 20px;
+    justify-content: space-between;
+}
+
+.employee_Input{
+    background: none;
+    border: none;
+    border-bottom: 1px solid #F2F3F2;
+}
+
+.employee_input_Button{
+    padding: 10px;
+    outline: none;
+    background: #222A27;
+    border: 1px solid rgba(117, 240, 189, 0.2);
+    box-sizing: border-box;
+    box-shadow: -5px 5px 10px rgba(14, 17, 16, 0.2), 5px -5px 10px rgba(14, 17, 16, 0.2), -5px -5px 10px rgba(54, 67, 62, 0.9), 5px 5px 13px rgba(14, 17, 16, 0.9), inset 1px 1px 2px rgba(54, 67, 62, 0.3), inset -1px -1px 2px rgba(14, 17, 16, 0.5);
+    border-radius: 10px;
+    color: #F2F3F2;
+    margin-top: 20px;
+}

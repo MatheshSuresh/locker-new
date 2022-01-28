@@ -1,0 +1,203 @@
+.dashboard{
+  display: flex;
+  height: 100vh;
+  background-color: #292929;
+}
+
+.dashboard_Sidebar{
+    flex:2.5;
+    max-height: 100vh;
+    width: 150px;
+}
+    
+.dashboard_Rightbar{
+    flex:9.5;
+}
+
+.dashboard_RightbarTop{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin:25px 30px 0 30px;
+    height: 113px;   
+}
+
+.dashboard_Icon{
+    height: 40px !important;
+    width: 40px !important;
+    color: #F2F3F2;
+    margin-left: 10px;
+}
+
+.dashboard_Heading{
+    color: #F2F3F2;
+    margin:0% 25% 0% 3% ;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.dashboard_Input{
+    width: 100%;
+    position: relative;
+    justify-content: center;
+    margin-left: 8%;
+}
+
+.dashboard_Inputfields{
+    padding:25px 40px;
+    margin-top: 10px;
+    border: none;
+    outline: none;
+    position : relative;
+    font-size: 15px;
+    color:rgb(192, 192, 192);
+    height: 50px;
+    width: 250%;
+    background: #292929;
+    border: 2.5px solid rgba(96, 108, 103, 0.5);
+    box-sizing: border-box;
+    box-shadow: 1px 1px 2px rgba(66, 66, 66, 0.3), -1px -1px 2px rgba(16, 16, 16, 0.5), inset -7px 7px 14px rgba(16, 16, 16, 0.2), inset 7px -7px 14px rgba(16, 16, 16, 0.2), inset -7px -7px 14px rgba(66, 66, 66, 0.9), inset 7px 7px 18px rgba(16, 16, 16, 0.9);
+    border-radius: 20px;
+}
+
+.dashboard_label_Icon{
+    position: absolute;
+    bottom:16px;
+    left: 8px;
+    color: rgb(192, 192, 192);
+}
+
+.dashboard_RightbarBottom{
+    display: flex;
+}
+
+.dashboard_lockerContainer{
+    width: 800px;
+    min-height: 682px;
+    height: fit-content;
+    background-color:#212926 ;
+    margin: 0px 0px 10px 120px;
+    box-shadow: 5px 5px 10px rgba(14, 17, 16, 0.2), -5px -5px 10px rgba(14, 17, 16, 0.2), 5px -5px 10px rgba(54, 67, 62, 0.9), -5px 5px 13px rgba(14, 17, 16, 0.9), inset -1px 1px 2px rgba(54, 67, 62, 0.3), inset 1px -1px 2px rgba(14, 17, 16, 0.5);
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.dashboard_detailget{
+    border: none;
+    outline: none;
+    background:none ;
+}
+
+.dashboard_lockerBox{
+    width: 130px;
+    height: 130px;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    border-radius: 10px;
+    border:1px solid #03301f ;
+    box-shadow: 3px 3px 6px rgba(13, 16, 15, 0.2), 3px 3px 6px rgba(13, 16, 15, 0.2), 3px 3px 6px rgba(53, 66, 61, 0.9), 3px 3px 8px rgba(13, 16, 15, 0.9), inset -1px 1px 2px rgba(53, 66, 61, 0.3), inset 1px -1px 2px rgba(13, 16, 15, 0.5);
+}
+
+.dashboard_lockerBox>h5{
+    font-size: 20px;
+    font-weight: 500;
+    color: #F2F3F2;;
+}
+
+.dashboard_lockerBox>p{
+    font-size: 15px;
+    font-weight: 500;
+    color: #F2F3F2;
+}
+
+.dashboard_lockerIcon{
+    width: 35px !important;
+    height: 35px !important;
+    color: #39B54A;
+}
+
+.dashboard_unlockButton{
+    background: none;
+    color: rgb(240, 3, 82);
+    border: none;
+    padding: none;
+    margin-left: 55%;
+    cursor: pointer;
+}
+
+.dashboard_unlockButton_logo{
+    width: 25px !important;
+    height: 25px !important;
+}
+
+.dashboard_lockerInfo{
+    width: 350px;
+    height: 720px;
+    background-color:#212926 ;
+    margin: 0px 0px 10px 120px;
+    box-shadow: 5px 5px 10px rgba(14, 17, 16, 0.2), -5px -5px 10px rgba(14, 17, 16, 0.2), 5px -5px 10px rgba(54, 67, 62, 0.9), -5px 5px 13px rgba(14, 17, 16, 0.9), inset -1px 1px 2px rgba(54, 67, 62, 0.3), inset 1px -1px 2px rgba(14, 17, 16, 0.5);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #F2F3F2;
+}
+
+.dashboard_lockerInfo>h3{
+    margin-top:20px;
+}
+.dashboard_lockerInfoTop{
+    display:flex;
+    align-items: center;
+    justify-content:space-around;
+    width: 40%;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.dashboard_profileImg{
+    width: 100px;
+    height: 110px;
+    border-radius: 10px;
+    margin: -30px 0px;
+}
+
+.dashboard_lockerImg{
+    width: 40px !important;
+    height: 40px !important;
+}
+
+.dashboard_lockerInfo_details{
+    height: 720px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.dashboard_lockerInfo_detailsdiv{
+    width: 90%;
+    font-size: 1.5rem;
+}
+
+.dashboard_lockerInfo_detailsdiv>h6{
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.dashboard_lockerInfo_detailsdiv>p{
+    border-bottom: 1px solid #F2F3F2;
+    width: 90%;
+    margin-top: 25px;
+    margin-left: 10px;
+}
+
+
+

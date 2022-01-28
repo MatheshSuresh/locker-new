@@ -1,0 +1,231 @@
+.reports{
+    display: flex;
+    height: 100vh;
+    background-color: #292929;
+    color: #F2F3F2;
+  }
+
+  .reports_Sidebar{
+    flex:2.5;
+    max-height: 100vh;
+    width: 150px;
+}
+
+.reports_Rightbar{
+    flex:9.5;
+}
+
+.reports_RightbarTop{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin:25px 30px 0 30px;
+    height: 113px;   
+}
+
+.reports_Icon{
+    height: 40px !important;
+    width: 40px !important;
+    color: #F2F3F2;
+    margin-left: 10px;
+}
+
+.reports_Heading{
+    color: #F2F3F2;
+    margin:0% 25% 0% 3% ;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.reports_search_Input{
+    width: 100%;
+    position: relative;
+    justify-content: center;
+    margin-left: 8%;
+}
+
+.reports_search_Inputfields{
+    padding:25px 40px;
+    margin-top: 10px;
+    border: none;
+    outline: none;
+    position : relative;
+    font-size: 15px;
+    color:rgb(192, 192, 192);
+    height: 50px;
+    width: 250%;
+    background: #292929;
+    border: 2.5px solid rgba(96, 108, 103, 0.5);
+    box-sizing: border-box;
+    box-shadow: 1px 1px 2px rgba(66, 66, 66, 0.3), -1px -1px 2px rgba(16, 16, 16, 0.5), inset -7px 7px 14px rgba(16, 16, 16, 0.2), inset 7px -7px 14px rgba(16, 16, 16, 0.2), inset -7px -7px 14px rgba(66, 66, 66, 0.9), inset 7px 7px 18px rgba(16, 16, 16, 0.9);
+    border-radius: 20px;
+}
+
+.reports_search_Icon{
+    position: absolute;
+    bottom:16px;
+    left: 8px;
+    color: rgb(192, 192, 192);
+}
+
+.reports_RightbarBottom{
+    display: flex;
+}
+
+.reports_RightbarBottomleft{
+    display: flex;
+    flex-direction: column;
+}
+
+.reports_lockerContainer{
+    width: 800px;
+    min-height: 300px;
+    height: fit-content;
+    background-color:#212926 ;
+    margin: 0px 0px 10px 120px;
+    box-shadow: 5px 5px 10px rgba(14, 17, 16, 0.2), -5px -5px 10px rgba(14, 17, 16, 0.2), 5px -5px 10px rgba(54, 67, 62, 0.9), -5px 5px 13px rgba(14, 17, 16, 0.9), inset -1px 1px 2px rgba(54, 67, 62, 0.3), inset 1px -1px 2px rgba(14, 17, 16, 0.5);
+    border-radius: 20px;
+}
+
+.reports_lockerContainer>h3{
+   margin: 20px;
+   font-weight: 600;
+   font-size: 30px;
+}
+
+.reports_lockerContainer>hr{
+    margin: 0px 20px;
+    border-color: rgb(1, 99, 1);
+    border-top:none ;
+}
+
+.reports_form{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.reports_Input_label{
+    margin:0px 20px;
+}
+
+.reports_Input{
+    margin:25px 38px;
+    background-color: #222A27;
+    border: none;
+    padding: 7px 8px;
+    box-shadow: 2px 2px 6px rgba(14, 17, 16, 0.2), -2px -2px 6px rgba(14, 17, 16, 0.2), 2px -2px 6px rgba(54, 67, 62, 0.9), -2px 5px 13px rgba(14, 17, 16, 0.9), inset -1px 1px 2px rgba(54, 67, 62, 0.3), inset 1px -1px 2px rgba(14, 17, 16, 0.5);
+    color: #F2F3F2 ;
+}
+
+.reports_lockerContainer2{
+    width: 800px;
+    height: 300px;
+    background-color:#212926 ;
+    margin: 25px 0px 10px 120px;
+    box-shadow: 5px 5px 10px rgba(14, 17, 16, 0.2), -5px -5px 10px rgba(14, 17, 16, 0.2), 5px -5px 10px rgba(54, 67, 62, 0.9), -5px 5px 13px rgba(14, 17, 16, 0.9), inset -1px 1px 2px rgba(54, 67, 62, 0.3), inset 1px -1px 2px rgba(14, 17, 16, 0.5);
+    border-radius: 20px;
+}
+
+.reports_lockerContainer2top{
+    display: flex;
+    align-items: center;
+    margin: 20px 30px;
+    justify-content: space-between;
+}
+
+.reports_lockerContainer2top>h1{
+   font-weight: 600;
+}
+
+.reports_lockerContainer2_search_Input{
+    width: 100%;
+    position: relative;
+    justify-content: center;
+    margin-left: 8%;
+}
+
+.reports_lockerContainer2_search_Inputfields{
+    padding:10px 40px;
+    margin-top: 10px;
+    border: none;
+    outline: none;
+    position : relative;
+    font-size: 15px;
+    color:rgb(192, 192, 192);
+    height: 40px;
+    width: 90%;
+    background: #292929;
+    border: 2.5px solid rgba(96, 108, 103, 0.5);
+    box-sizing: border-box;
+    box-shadow: 1px 1px 2px rgba(66, 66, 66, 0.3), -1px -1px 2px rgba(16, 16, 16, 0.5), inset -7px 7px 14px rgba(16, 16, 16, 0.2), inset 7px -7px 14px rgba(16, 16, 16, 0.2), inset -7px -7px 14px rgba(66, 66, 66, 0.9), inset 7px 7px 18px rgba(16, 16, 16, 0.9);
+    border-radius: 20px;
+}
+
+.reports_lockerContainer2_search_Icon{
+    position: absolute;
+    bottom:7px;
+    left: 8px;
+    color: rgb(192, 192, 192);
+}
+
+.reports_lockerContainer2>hr{
+    margin: 0px 30px;
+    border-color: rgb(1, 99, 1);
+    border-top:none ;
+}
+
+.reports_lockerInfo{
+    width: 350px;
+    height: 360px;
+    background-color:#212926 ;
+    margin: 0px 0px 10px 120px;
+    box-shadow: 5px 5px 10px rgba(14, 17, 16, 0.2), -5px -5px 10px rgba(14, 17, 16, 0.2), 5px -5px 10px rgba(54, 67, 62, 0.9), -5px 5px 13px rgba(14, 17, 16, 0.9), inset -1px 1px 2px rgba(54, 67, 62, 0.3), inset 1px -1px 2px rgba(14, 17, 16, 0.5);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reports_lockerInfo>h3{
+    margin-top:20px;
+    border-bottom: 1px solid green;
+}
+
+.reports_occupied_lockers{
+    height: 300px;
+    width: 300px;
+    translate: (-50%, -50%);
+    top: 50%;
+    left: 50%;
+    display: grid;
+    place-items: center;
+    margin-top: 20px;
+}
+
+.reports_occupied_lockers_circular{
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    box-shadow: 1px 1px 2px rgba(91, 255, 118, 0.3), -1px -1px 2px rgba(23, 72, 30, 0.5), inset -5px 5px 10px rgba(23, 72, 30, 0.2), inset 5px -5px 10px rgba(23, 72, 30, 0.2), inset -5px -5px 10px rgba(91, 255, 118, 0.9), inset 5px 5px 13px rgba(23, 72, 30, 0.9);
+}
+
+.reports_occupied_lockers_circular::before {
+    content: "";
+    height: 13.5rem;
+    width: 13.5rem;
+    background-color: #212926;
+    border-radius: 50% ;
+    position: absolute;
+}
+
+.reports_occupied_lockers_value{
+    position: relative;
+    font-size: 50px;
+    font-weight: 500;
+    color: #F2F3F2;
+}

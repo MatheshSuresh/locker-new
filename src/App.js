@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter,Routes,Route} from "react-router-dom"
+import Dashboard from './pages/dashboard/dashboard';
+import Reports from './pages/reports/reports';
+import Userprofile from './pages/user profile/userprofile';
+import Employee from './pages/employee list/employee';
+import AdminCtrl from './pages/superAdminCtrl/adminCtrl';
+import Login from './pages/login/login';
+import Register from './pages/register/register';
+import Forgotpass from './pages/forgotpass/forgotPass';
+import Newpass from './pages/forgotpass/newpass';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route exact path='/' element={<Login />}/>
+        <Route exact path='/login' element={<Login />}/>
+        <Route exact path='/forgotpass' element={<Forgotpass />}/>
+        <Route exact path='/newpass' element={<Newpass />}/>
+        <Route exact path='/register' element={<Register />}/>
+        <Route exact path='/dashboard' element={<Dashboard/>}/>
+        <Route exact path='/reports' element={<Reports/>}/>    
+        <Route exact path='/userprofile' element={<Userprofile/>}/>
+        <Route exact path='/empprofile' element={<Employee/>}/>
+        <Route exact path='/AdminCtrl' element={<AdminCtrl/>}/>    
+      </Routes>
+    </BrowserRouter>
   );
 }
 
