@@ -8,6 +8,7 @@ import Login from './pages/login/login';
 import Register from './pages/register/register';
 import Forgotpass from './pages/forgotpass/forgotPass';
 import Newpass from './pages/forgotpass/newpass';
+import AuthRoute from "./authroute";
 
 function App() {
   return (
@@ -18,11 +19,11 @@ function App() {
         <Route exact path='/forgotpass' element={<Forgotpass />}/>
         <Route exact path='/newpass' element={<Newpass />}/>
         <Route exact path='/register' element={<Register />}/>
-        <Route exact path='/dashboard' element={<Dashboard/>}/>
-        <Route exact path='/reports' element={<Reports/>}/>    
-        <Route exact path='/userprofile' element={<Userprofile/>}/>
-        <Route exact path='/empprofile' element={<Employee/>}/>
-        <Route exact path='/AdminCtrl' element={<AdminCtrl/>}/>    
+        <Route exact path='/dashboard' element={<AuthRoute><Dashboard/></AuthRoute>}/>
+        <Route exact path='/reports' element={<AuthRoute><Reports/></AuthRoute>}/>    
+        <Route exact path='/userprofile' element={<AuthRoute><Userprofile/></AuthRoute>}/>
+        <Route exact path='/empprofile' element={<AuthRoute><Employee/></AuthRoute>}/>
+        <Route exact path='/AdminCtrl' element={<AuthRoute><AdminCtrl/></AuthRoute>}/>    
       </Routes>
     </BrowserRouter>
   );

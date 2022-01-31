@@ -1,16 +1,14 @@
 import axios from 'axios';
 import {useEffect, useState} from 'react';
-import {useNavigate} from "react-router-dom";
 
-
-const useRegisterForm = (validateInfo) => {
-    let navigate=useNavigate();
-    const API_URL = "http://localhost:3001/user/register"
+const useAdminCtrlForm = (validateInfo) => {
+    const API_URL = "http://localhost:3001/locker/insertlocker"
     const [values,setValues] = useState({
-        username:"",
-        email:"",
-        password:"",
-        password2:""
+        name:"",
+        status:"",
+        subscribe_topic:"",
+        publish_topic:"",
+        key:""
     });
     const [errors,setErrors]=useState({});
     const [submit,setSubmit]=useState(false);
@@ -31,23 +29,25 @@ const handleSubmit=async(e)=>{
 
 useEffect(()=>{
     if(Object.keys(errors).length===0 && submit){
-         axios.post(API_URL,{
-            username:values.username,
-            email:values.email,
-            password:values.password
-        })
-    .then(res=>{
-        navigate("/");
-        console.log("registration success");
-        navigate("/login");
-    })
-    .catch(err=>{
-        console.log("Registration Failed");
-    })
-    }
+        axios.post(API_URL,{
+           name:values.name,
+           status:values.status,
+           subscribe_topic:values.subscribe_topic,
+           publish_topic:values.publish_topic,
+           key:values.key
+       })
+   .then(res=>{
+    alert("Locker Added")
+    setSubmit(false);
+   })
+   .catch(err=>{
+       console.log("Cant Add Locker");
+   })
+   }
+    
 },[errors])// eslint-disable-line react-hooks/exhaustive-deps
 
 return {handleChange,values,handleSubmit,errors};
 }
 
-export default useRegisterForm;
+export default useAdminCtrlForm;

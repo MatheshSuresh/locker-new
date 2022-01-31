@@ -1,17 +1,18 @@
 import axios from 'axios';
 import {useEffect, useState} from 'react';
-// import {useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 
+const API_URL='http://localhost:3001/user/login';
 const useLoginForm = (validateInfo) => {
-    // let navigate=useNavigate();
-    const API_URL = "http://localhost:3001/user/login"
+   const navigate=useNavigate();
     const [values,setValues] = useState({
-        username:"",
+        email:"",
         password:""
     });
     const [errors,setErrors]=useState({});
-    const [submit,setSubmit]=useState(false);
+    const [submit,SetSubmit]=useState(false);
+
 
 const handleChange= e =>{
         const {name,value}=e.target;
@@ -22,27 +23,28 @@ const handleChange= e =>{
     };
 const handleSubmit=async(e)=>{
     e.preventDefault();
-    setSubmit(true);
-    setErrors(await validateInfo(values)); 
+   
+    setErrors(validateInfo(values));
+    SetSubmit(true);
+    
 }
-
-
-useEffect(()=>{
+useEffect(() => {
     if(Object.keys(errors).length===0 && submit){
-         axios.post(API_URL,{
-            username:values.username,
-            password:values.password
-        })
+        axios.post(API_URL,{
+        email:values.email,
+        password:values.password
+    })
     .then(res=>{
         sessionStorage.setItem('auth',JSON.stringify(res.data))
-        // navigate("/dashboard");
-        console.log("Login success")
+        navigate("/dashboard");
+
     })
-    .catch(err=>{
-        alert("Invaild User Credenitials");
+    .catch(err =>{
+         console.log(err)
     })
     }
-},[errors])// eslint-disable-line react-hooks/exhaustive-deps
+}, [errors])// eslint-disable-line react-hooks/exhaustive-deps
+
 
 return {handleChange,values,handleSubmit,errors};
 }

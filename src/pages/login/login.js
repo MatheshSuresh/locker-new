@@ -14,17 +14,17 @@ const Login = () => {
                 <div className='login_Input'>
                 <input
                 className='login_Inputfields'
-                placeholder='Username'
-                name='username'
-                type="text"
-                value={values.username}
+                placeholder='Email'
+                name='email'
+                type="email"
+                value={values.email}
                 onChange={handleChange}
                 >
                 </input>
                 <label htmlFor='username' className='label_Icon'>
                 <Icon icon="ant-design:user-outlined" />
                 </label>
-                {errors.username && <p>{errors.username}</p>}
+                {errors.email && <p>{errors.email}</p>}
                 </div>
                 <div className='login_Input'>
                 <input

@@ -1,9 +1,15 @@
 import React from 'react';
 import "./sidebar.css";
 import { SidebarData } from './sidebarData';
+import {useNavigate} from "react-router-dom";
 
 
 const Sidebar = () => {
+    const navigate = useNavigate();
+    const Signout =()=>{
+        sessionStorage.clear();
+        navigate("/");
+    }
     return (
         <div className='sidebar'>
             <ul className='sidebarList'>
@@ -21,7 +27,7 @@ const Sidebar = () => {
                      </li>
              })}
              </div>
-             <button className="sidebar_Signout"> Sign out</button>
+             <button className="sidebar_Signout" onClick={Signout}> Sign out</button>
             </ul>
         </div>
     )

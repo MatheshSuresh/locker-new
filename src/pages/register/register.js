@@ -42,11 +42,11 @@ const Register = (props) => {
                 <div className='register_Input'>
                     <input
                     className='register_Inputfields'
-                    name='mobile'
+                    name='password'
                     value={values.password}
-                    type="number"
+                    type="password"
                     onChange={handleChange}
-                    placeholder='Mobile Number'>
+                    placeholder='Password'>
                     </input >
                     <label className='label_Icon'>
                     <Icon icon="entypo:old-mobile" />
@@ -56,11 +56,11 @@ const Register = (props) => {
                 <div className='register_Input'>
                     <input
                     className='register_Inputfields'
-                    name='IMEI'
+                    name='password2'
                     value={values.password2}
-                    type="number"
+                    type="password"
                     onChange={handleChange}
-                    placeholder='IMEI Number'>
+                    placeholder='Re_Enter Password'>
                     </input >
                     <label className='label_Icon'>
                     <Icon icon="fluent:book-number-20-regular" />

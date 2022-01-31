@@ -10,6 +10,8 @@ const Dashboard = () => {
     const [Dashboarddata,setDashboarddata]=useState(""); 
     const [lock,setLock]=useState("unlock");;
     const [lockerInfo,setLockerInfo]= useState({});
+    const [DashboardInfo,setDashboardInfo]=useState(Dashboarddata);
+    const [searchText, setSearchText]=useState('');
     const getInfo = async () =>{
         try{
             const {data} = await axios.get('http://localhost:3001/locker/lockerdata');
@@ -21,15 +23,36 @@ const Dashboard = () => {
 
     useEffect(()=>{
         getInfo();
-    });
-    
-        const handleUnlock = async(values)=> {
-        await axios.post("http://localhost:3001/locker/unlock",values)
-        const {data} = await axios.get('http://localhost:3001/locker/lockerdata');
-        setDashboarddata(data);
-        setLock("unlock");
-        console.log(lock);
+    },[]);
+
+    useEffect(()=>{
+        setDashboardInfo(Dashboarddata);
+    },[Dashboarddata]);
+
+    useEffect(()=>{
+        if(searchText==='') {
+            return;
+        }else{
+        setDashboardInfo(()=>
+        Dashboarddata.filter((item)=>
+        item.name.toLowerCase().match(searchText.toLowerCase())));
+        }
+    },[searchText,Dashboarddata]);
+
+    const handleChange =(e) =>{
+        e.preventDefault();
+        setSearchText(e.target.value);
+        if(!e.target.value.length>0){
+            setDashboardInfo(Dashboarddata);
+        }
+    }
+
+    const handleUnlock = async(values)=> {
+    await axios.post("http://localhost:3001/locker/unlock",values)
+    setLock("unlock");
+    console.log(lock);
        }
+       
     return (
     <div className='dashboard'>
         <Sidebar className="dashboard_Sidebar"/>
@@ -42,8 +65,10 @@ const Dashboard = () => {
                 <input
                 className='dashboard_Inputfields'
                 placeholder='Search'
-                name='username'
+                name='search'
                 type="text"
+                value={searchText}
+                onChange={handleChange}
                 >
                 </input>
                 <label htmlFor='username' className='dashboard_label_Icon'>
@@ -55,17 +80,17 @@ const Dashboard = () => {
             <div className="dashboard_RightbarBottom">
                 <div className="dashboard_lockerContainer">
                 {(()=>{
-                        if(Dashboarddata.length!==0){
+                        if(DashboardInfo.length!==0){
                         return( 
                         <>   
-                        {Dashboarddata.map((values,key)=>{
+                        {DashboardInfo.map((values,key)=>{
                         return <button className='dashboard_detailget'
                         onClick={()=>setLockerInfo(values)}>
                         <div key={key}  className='dashboard_lockerBox'>
                         <Icon icon="bx:bxs-lock" className='dashboard_lockerIcon' id={values.status}/>
                             <h5>{values.name}</h5>
                             <p>{values.status}</p>
-                        {values.status==="locked" ? 
+                        {values.status==="lock" ? 
                         <button type='button' 
                         className='dashboard_unlockButton'
                         onClick={()=>handleUnlock(values)}><Icon icon="mdi:toggle-switch-off" className='dashboard_unlockButton_logo'/></button>:""}

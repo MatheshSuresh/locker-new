@@ -1,9 +1,36 @@
-import React from 'react';
+import {useState, useEffect} from 'react';
 import {Icon} from "@iconify/react";
 import Sidebar from '../../components/sidebar';
 import "./reports.css";
+import axios from "axios";
 
 const Reports = () => {
+    const [Dashboarddata,setDashboarddata]=useState(""); 
+    const [DashboardInfo,setDashboardInfo]=useState(Dashboarddata);
+    const getInfo = async () =>{
+        try{
+            const {data} = await axios.get('http://localhost:3001/locker/lockerdata');
+            setDashboarddata(data);
+          }catch(err){
+              console.log(err)
+          }
+    }
+
+    useEffect(()=>{
+        getInfo();
+    },[]);
+
+    useEffect(()=>{
+        setDashboardInfo(Dashboarddata);
+        console.log(Dashboarddata);
+        if(Dashboarddata.length!==0){    
+        setDashboardInfo(()=>
+        Dashboarddata.filter((item)=>
+        item.status.match("locked")));
+        }
+    });
+
+  
     return (
         <div className='reports'>
         <Sidebar className="reports_Sidebar"/>
