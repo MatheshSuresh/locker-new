@@ -12,6 +12,7 @@ const Dashboard = () => {
     const [lockerInfo, setLockerInfo] = useState({});
     const [DashboardInfo, setDashboardInfo] = useState(Dashboarddata);
     const [searchText, setSearchText] = useState('');
+
     const getInfo = async () => {
         try {
             const { data } = await axios.get('http://localhost:3001/locker/lockerdata');
@@ -19,10 +20,15 @@ const Dashboard = () => {
         } catch (err) {
             console.log(err)
         }
+        setTimeout(()=>{
+            getInfo()
+        },2000)
     }
 
     useEffect(() => {
-        getInfo();
+        setTimeout(() => {
+            getInfo();
+        }, 2000)
     }, []);
 
     useEffect(() => {
