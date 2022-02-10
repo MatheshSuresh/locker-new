@@ -48,14 +48,13 @@ const Dashboard = () => {
     }
 
     const handleUnlock = async (values) => {
-        console.log(values)
-        var data = await axios.post("http://localhost:3001/locker/unlockupdate", values)
-        if (data !== null) {
+        await axios.post("http://localhost:3001/locker/unlock", values)
+        var datanew = await axios.post("http://localhost:3001/locker/unlockupdate", values)
+        if (datanew !== null) {
             setLock("unlock");
             console.log(lock);
             getInfo();
         }
-
     }
 
     return (
