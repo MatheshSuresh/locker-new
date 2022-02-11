@@ -9,6 +9,7 @@ import axios from "axios";
 const AdminCtrl = () => {
     const [locker, setLocker] = useState("");
     const [Dashboarddata, setDashboarddata] = useState("");
+    const [userdata, setUserdata] = useState([]);
     const [DashboardInfo, setDashboardInfo] = useState(Dashboarddata);
     const { values, handleChange, handleSubmit, errors } = useAdminCtrlForm(validateInfo);
 
@@ -16,6 +17,8 @@ const AdminCtrl = () => {
     const getInfo = async () => {
         try {
             const { data } = await axios.get('http://localhost:3001/locker/lockerdata');
+            const users = await axios.get('http://localhost:3001/user/check');
+            setUserdata(users.data)
             setDashboarddata(data);
         } catch (err) {
             console.log(err);
@@ -37,6 +40,26 @@ const AdminCtrl = () => {
         getInfo();
     }, []);
 
+    const addlocker = async () => {
+        var lockername = document.getElementById("lockername").value
+        var status = document.getElementById("status").value
+        var subtopic = document.getElementById("subtopic").value
+        var pubtopic = document.getElementById("pubtopic").value
+        var key = document.getElementById("key").value
+        var user = document.getElementById("user").value
+        var data = {
+            name: lockername,
+            status: status,
+            subscribe_topic: subtopic,
+            publish_topic: pubtopic,
+            key: key,
+            user: user
+        }
+        var addlockerdata = await axios.post(`http://localhost:3001/locker/insertlocker`, data).then((res) => { return res.data })
+        if(addlockerdata !==null){
+            window.location.reload()
+        }
+    }
     return (
         <div className='adminCtrl'>
             <Sidebar className="adminCtrl_Sidebar" />
@@ -124,10 +147,11 @@ const AdminCtrl = () => {
                         </div>
                         <div className='adminCtrl_lockerInfo2'>
                             <h3>Add Locker</h3>
-                            <form className='adminCtrl_lockerInfo2_Form' onSubmit={handleSubmit}>
+                            <div className='adminCtrl_lockerInfo2_Form' >
                                 <label htmlFor="">Locker Name</label>
                                 <input
                                     name="name"
+                                    id='lockername'
                                     type="text"
                                     className='adminCtrl_lockerInfo_Input'
                                     value={values.name}
@@ -136,6 +160,7 @@ const AdminCtrl = () => {
                                 <br />
                                 <label htmlFor="">Status</label>
                                 <input
+                                    id='status'
                                     name="status"
                                     type="text"
                                     className='adminCtrl_lockerInfo_Input'
@@ -145,6 +170,7 @@ const AdminCtrl = () => {
                                 <br />
                                 <label htmlFor="">Subscribe Topic</label>
                                 <input
+                                    id='subtopic'
                                     name="subscribe_topic"
                                     type="text"
                                     className='adminCtrl_lockerInfo_Input'
@@ -154,15 +180,17 @@ const AdminCtrl = () => {
                                 <br />
                                 <label htmlFor="">Publish Topic</label>
                                 <input
+                                    id='pubtopic'
                                     name="publish-topic"
                                     type="text"
                                     className='adminCtrl_lockerInfo_Input'
-                                    value={values.publish_topic}
+
                                     onChange={handleChange} />
                                 {errors.publish_topic && <p>{errors.publish_topic}</p>}
                                 <br />
                                 <label htmlFor="">Message</label>
                                 <input
+                                    id='key'
                                     name="key"
                                     type="text"
                                     className='adminCtrl_lockerInfo_Input'
@@ -170,8 +198,16 @@ const AdminCtrl = () => {
                                     onChange={handleChange} />
                                 {errors.message && <p>{errors.message}</p>}
                                 <br />
-                                <button className='adminCtrl_lockerInfo_Button'>Add Locker</button>
-                            </form>
+                                <label htmlFor="">Select User</label>
+                                <select className='adminCtrl_lockerInfo_Input' id='user' name="user" onChange={handleChange} >
+                                    <option>Select User</option>
+                                    {userdata.map((data, index) => (
+                                        <option className="adminctrl_option" value={data.email} key={index}>{data.email}</option>
+                                    ))}
+
+                                </select>
+                                <button className='adminCtrl_lockerInfo_Button' onClick={addlocker}>Add Locker</button>
+                            </div>
                         </div>
                     </div>
                 </div>

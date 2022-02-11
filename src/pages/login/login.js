@@ -16,6 +16,7 @@ const Login = () => {
                 alert("You Are Not Valid User...")
             } else {
                 sessionStorage.setItem('auth', JSON.stringify(checkuser[0].password))
+                sessionStorage.setItem('useremail', checkuser[0].email)
                 window.location.replace("/dashboard")
             }
 

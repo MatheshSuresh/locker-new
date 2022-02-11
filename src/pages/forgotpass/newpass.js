@@ -7,9 +7,8 @@ const Newpass = () => {
     const newpassword =async () => {
         var password = document.getElementById("password").value
         var reenterpassword = document.getElementById("reenterpassword").value
-        console.log(password, reenterpassword)
+      
         if (password === reenterpassword) {
-            console.log("same")
             var data={
                 password:password,
                 email:"john@gmail.com"

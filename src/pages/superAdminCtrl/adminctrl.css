@@ -1,57 +1,57 @@
-.adminCtrl{
+.adminCtrl {
     display: flex;
     height: 100vh;
     background-color: #292929;
     color: #F2F3F2;
-  }
+}
 
-.adminCtrl_Sidebar{
-    flex:2.5;
+.adminCtrl_Sidebar {
+    flex: 2.5;
     max-height: 100vh;
     width: 150px;
 }
 
-.adminCtrl_Rightbar{
-    flex:9.5;
+.adminCtrl_Rightbar {
+    flex: 9.5;
 }
 
-.adminCtrl_RightbarTop{
+.adminCtrl_RightbarTop {
     display: flex;
     align-items: center;
     justify-content: left;
-    margin:25px 30px 0 30px;
-    height: 113px;   
+    margin: 25px 30px 0 30px;
+    height: 113px;
 }
 
-.adminCtrl_Icon{
+.adminCtrl_Icon {
     height: 40px !important;
     width: 40px !important;
     color: #F2F3F2;
     margin-left: 10px;
 }
 
-.adminCtrl_Heading{
+.adminCtrl_Heading {
     color: #F2F3F2;
-    margin:0% 25% 0% 3% ;
+    margin: 0% 25% 0% 3%;
     font-size: 40px;
     font-weight: 500;
 }
 
-.adminCtrl_search_Input{
+.adminCtrl_search_Input {
     width: 100%;
     position: relative;
     justify-content: center;
     margin-left: 8%;
 }
 
-.adminCtrl_search_Inputfields{
-    padding:25px 40px;
+.adminCtrl_search_Inputfields {
+    padding: 25px 40px;
     margin-top: 10px;
     border: none;
     outline: none;
-    position : relative;
+    position: relative;
     font-size: 15px;
-    color:rgb(192, 192, 192);
+    color: rgb(192, 192, 192);
     height: 50px;
     width: 250%;
     background: #292929;
@@ -61,59 +61,59 @@
     border-radius: 20px;
 }
 
-.adminCtrl_search_Icon{
+.adminCtrl_search_Icon {
     position: absolute;
-    bottom:16px;
+    bottom: 16px;
     left: 8px;
     color: rgb(192, 192, 192);
 }
 
 
-.adminCtrl_RightbarBottom{
+.adminCtrl_RightbarBottom {
     display: flex;
 }
 
-.adminCtrl_RightbarBottomleft{
+.adminCtrl_RightbarBottomleft {
     display: flex;
     flex-direction: column;
 }
 
-.adminCtrl_lockerContainer{
+.adminCtrl_lockerContainer {
     width: 800px;
     height: 300px;
-    background-color:#212926 ;
+    background-color: #212926;
     margin: 25px 0px 10px 120px;
     box-shadow: 5px 5px 10px rgba(14, 17, 16, 0.2), -5px -5px 10px rgba(14, 17, 16, 0.2), 5px -5px 10px rgba(54, 67, 62, 0.9), -5px 5px 13px rgba(14, 17, 16, 0.9), inset -1px 1px 2px rgba(54, 67, 62, 0.3), inset 1px -1px 2px rgba(14, 17, 16, 0.5);
     border-radius: 20px;
 }
 
-.adminCtrl_lockerContainertop{
+.adminCtrl_lockerContainertop {
     display: flex;
     align-items: center;
     margin: 20px 30px;
     justify-content: space-between;
 }
 
-.adminCtrl_lockerContainertop>h1{
-   font-weight: 600;
+.adminCtrl_lockerContainertop>h1 {
+    font-weight: 600;
 }
 
 
-.adminCtrl_lockerContainer2_search_Input{
+.adminCtrl_lockerContainer2_search_Input {
     width: 100%;
     position: relative;
     justify-content: center;
     margin-left: 8%;
 }
 
-.adminCtrl_lockerContainer2_search_Inputfields{
-    padding:10px 40px;
+.adminCtrl_lockerContainer2_search_Inputfields {
+    padding: 10px 40px;
     margin-top: 10px;
     border: none;
     outline: none;
-    position : relative;
+    position: relative;
     font-size: 15px;
-    color:rgb(192, 192, 192);
+    color: rgb(192, 192, 192);
     height: 40px;
     width: 90%;
     background: #292929;
@@ -123,44 +123,44 @@
     border-radius: 20px;
 }
 
-.adminCtrl_lockerContainer2_search_Icon{
+.adminCtrl_lockerContainer2_search_Icon {
     position: absolute;
-    bottom:7px;
+    bottom: 7px;
     left: 8px;
     color: rgb(192, 192, 192);
 }
 
-.adminCtrl_lockerContainer>hr{
+.adminCtrl_lockerContainer>hr {
     margin: 0px 30px;
     border-color: rgb(1, 99, 1);
-    border-top:none ;
+    border-top: none;
 }
 
-.adminCtrl_lockerInfoContainer{
+.adminCtrl_lockerInfoContainer {
     display: flex;
     flex-direction: column;
 }
 
-.adminctrl_databoard{
-    display:flex;
-    flex-direction:column ;
+.adminctrl_databoard {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
-.adminctrl_databoard_top{
-    margin:20px;
+.adminctrl_databoard_top {
+    margin: 20px;
 }
 
-.adminctrl_databoard_bottom{
-    margin:20px;
+.adminctrl_databoard_bottom {
+    margin: 20px;
 }
 
-.adminctrl_label{
-    margin-left:30px;
-    margin-right:20px
+.adminctrl_label {
+    margin-left: 30px;
+    margin-right: 20px
 }
 
-.adminctrl_Button{
+.adminctrl_Button {
     padding: 5px;
     outline: none;
     background: #222A27;
@@ -172,57 +172,57 @@
     margin-left: 30px;
 }
 
-.adminctrl_option{
-    padding:10px;
+.adminctrl_option {
+    padding: 10px;
 }
 
 
-.adminCtrl_lockerInfo{
+.adminCtrl_lockerInfo {
     width: 350px;
     height: 300px;
-    background-color:#212926 ;
+    background-color: #212926;
     margin: 10px 0px 10px 120px;
     box-shadow: 5px 5px 10px rgba(14, 17, 16, 0.2), -5px -5px 10px rgba(14, 17, 16, 0.2), 5px -5px 10px rgba(54, 67, 62, 0.9), -5px 5px 13px rgba(14, 17, 16, 0.9), inset -1px 1px 2px rgba(54, 67, 62, 0.3), inset 1px -1px 2px rgba(14, 17, 16, 0.5);
-    border-radius: 20px;  
+    border-radius: 20px;
 }
 
-.adminCtrl_lockerInfotop{
+.adminCtrl_lockerInfotop {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.adminCtrl_lockerInfotop>h3{
-    margin-top:15px;
+.adminCtrl_lockerInfotop>h3 {
+    margin-top: 15px;
     border-bottom: 1px solid green;
 }
 
-.adminCtrl_lockerInfo2{
+.adminCtrl_lockerInfo2 {
     width: 350px;
-    height: 380px;
-    background-color:#212926 ;
+    height: 400px;
+    background-color: #212926;
     margin: 10px 0px 10px 120px;
     box-shadow: 5px 5px 10px rgba(14, 17, 16, 0.2), -5px -5px 10px rgba(14, 17, 16, 0.2), 5px -5px 10px rgba(54, 67, 62, 0.9), -5px 5px 13px rgba(14, 17, 16, 0.9), inset -1px 1px 2px rgba(54, 67, 62, 0.3), inset 1px -1px 2px rgba(14, 17, 16, 0.5);
     border-radius: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;  
+    align-items: center;
 }
 
-.adminCtrl_lockerInfo2>h3{
+.adminCtrl_lockerInfo2>h3 {
     margin: 1px 0px;
     border-bottom: 1px solid green;
 }
 
-.adminCtrl_lockerInfo2_Form{
+.adminCtrl_lockerInfo2_Form {
     display: flex;
     flex-direction: column;
     margin: 10px;
     width: 90%;
 }
 
-.adminCtrl_lockerInfo_Input{
+.adminCtrl_lockerInfo_Input {
     padding: 2px;
     margin: 1px 0px;
     background: none;
@@ -232,7 +232,7 @@
     outline: none;
 }
 
-.adminCtrl_lockerInfo_Button{
+.adminCtrl_lockerInfo_Button {
     padding: 5px;
     outline: none;
     background: #222A27;
@@ -241,13 +241,15 @@
     box-shadow: -5px 5px 10px rgba(14, 17, 16, 0.2), 5px -5px 10px rgba(14, 17, 16, 0.2), -5px -5px 10px rgba(54, 67, 62, 0.9), 5px 5px 13px rgba(14, 17, 16, 0.9), inset 1px 1px 2px rgba(54, 67, 62, 0.3), inset -1px -1px 2px rgba(14, 17, 16, 0.5);
     border-radius: 10px;
     color: #F2F3F2;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-.adminCtrl_occupied_lockers{
+.adminCtrl_occupied_lockers {
     margin-top: 15px;
 }
 
-.adminCtrl_occupied_lockers_circular{
+.adminCtrl_occupied_lockers_circular {
     height: 220px;
     width: 220px;
     border-radius: 50%;
@@ -261,13 +263,16 @@
     height: 11.5rem;
     width: 11.5rem;
     background-color: #212926;
-    border-radius: 50% ;
+    border-radius: 50%;
     position: absolute;
 }
 
-.adminCtrl_occupied_lockers_value{
+.adminCtrl_occupied_lockers_value {
     position: relative;
     font-size: 50px;
     font-weight: 500;
     color: #F2F3F2;
+}
+option{
+    color: black;
 }

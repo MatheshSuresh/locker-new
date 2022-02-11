@@ -35,6 +35,7 @@ useEffect(() => {
         password:values.password
     })
     .then(res=>{
+        sessionStorage.setItem('useremail', values.email)
         sessionStorage.setItem('auth',JSON.stringify(res.data))
         navigate("/dashboard");
 

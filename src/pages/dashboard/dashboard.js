@@ -15,20 +15,28 @@ const Dashboard = () => {
 
     const getInfo = async () => {
         try {
+            var useremail = sessionStorage.getItem("useremail")
+            var user = await axios.get(`http://localhost:3001/user/check`).then((res) => { return res.data })
             const { data } = await axios.get('http://localhost:3001/locker/lockerdata');
-            setDashboarddata(data);
+            var checkuser = user.filter((res) => { return res.email === useremail })
+            if (checkuser[0].role === "user") {
+                var mydata = await data.filter((response) => { return response.user === useremail })
+                if (mydata.length !== 0) {
+                    setDashboarddata(mydata);
+                }
+            } else {
+                setDashboarddata(data);
+            }
         } catch (err) {
             console.log(err)
         }
-        setTimeout(()=>{
+        setTimeout(() => {
             getInfo()
-        },2000)
+        }, 2000)
     }
 
     useEffect(() => {
-        setTimeout(() => {
-            getInfo();
-        }, 2000)
+        getInfo();
     }, []);
 
     useEffect(() => {
