@@ -1,9 +1,24 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Icon} from "@iconify/react";
 import "./employee.css"
 import Sidebar from '../../components/sidebar';
+import axios from 'axios';
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+
 
 const Employee = () => {
+
+    const [Employee, setEmployee] = useState('')
+    
+
+    useEffect(async() => {
+      const user = await axios.get(`http://localhost:3001/user/viewall`).then((res) => { return res.data })
+      setEmployee(user)
+    }, [])
+    
+    
+
     return (
         <div className='employee'>
         <Sidebar className="employee_Sidebar"/>
@@ -47,13 +62,33 @@ const Employee = () => {
                     </form>
                     </div>
                 <hr />
+                    
+                {/* {
+                        Employee.map((values, key) => {
+                            return <>
+                                <Row>
+                                    <Col>{values.email}</Col>
+                                    <Col>{values.username}</Col>
+                                </Row>
+                            </>
+                    })} */}
+                    <table className="tablelist">
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                        </tr>
+                        {
+                        Employee.map((values, key) => {
+                            return <>
+                                <tr>
+                                    <td>{values.username}</td>
+                                    <td>{values.email}</td>
+                                </tr>
+                            </>
+                    })}
+                    </table>
                 </div>
-                <div className="employee_lockerContainer2">
-                <div className='employee_lockerContainer2top'>
-                <h1>Detail</h1>
-
-                </div>
-                </div>                
+                               
                 </div>
             <div className='employee_lockerInfo'>
                 <div className="employee_lockerInfotop">
