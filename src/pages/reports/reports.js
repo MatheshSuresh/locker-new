@@ -9,19 +9,19 @@ const Reports = () => {
     const [Dashboarddata, setDashboarddata] = useState("");
     const [DashboardInfo, setDashboardInfo] = useState(Dashboarddata);
     const [loginfo, setLogInfo] = useState([]);
-    const [userdata, setUserdata] = useState([]);
     const [reportdata, setReportdata] = useState([]);
     const [reportpercentage, setReportpercentage] = useState([]);
+    const [fromtime, setFromtime] = useState(null);
+    const [totime, setTotime] = useState(null);
+
     const getInfo = async () => {
         try {
             const { data } = await axios.get('https://smartlockers.herokuapp.com/locker/lockerdata');
-            var user = await axios.get(`https://smartlockers.herokuapp.com/user/check`).then((res) => { return res.data })
             const logdata = await axios.get('https://smartlockers.herokuapp.com/locker/logdata').then((res) => { return res.data })
             const totaldata = await axios.get('https://smartlockers.herokuapp.com/locker/occupied').then((res) => { return res.data })
             setDashboarddata(data);
-            setUserdata(user)
             setLogInfo(logdata)
-            console.log(totaldata.length, data.length)
+            console.log(data.length, totaldata.length)
             var perc = "";
             if (isNaN(data.length) || isNaN(totaldata.length)) {
                 perc = " ";
@@ -30,6 +30,7 @@ const Reports = () => {
             }
             setReportpercentage(Math.round(perc))
 
+
         } catch (err) {
             console.log(err)
         }
@@ -37,7 +38,7 @@ const Reports = () => {
 
     useEffect(() => {
         getInfo();
-    }, []);
+    });
 
     // useEffect(() => {
     //     setDashboardInfo(Dashboarddata);
@@ -49,35 +50,64 @@ const Reports = () => {
     // });
 
 
-    const searchbtn = async () => {
-        var from = document.getElementById("from").value
-        var to = document.getElementById("to").value
-        var empid = document.getElementById("empid").value
-        var lockername = document.getElementById("lockername").value
 
-        var report = []
-        for (var i = 0; i < loginfo.length; i++) {
-            for (var j = 0; j < Dashboarddata.length; j++) {
-                if (loginfo[i].name === Dashboarddata[j].name) {
-                    report.push({
-                        logdata: loginfo[i],
-                        lockerdata: Dashboarddata[j]
-                    })
+    const handlechangefromtime = (e) => {
+        setFromtime(e.target.value)
+    }
+    const handlechangetotime = (e) => {
+        setTotime(e.target.value)
+        if (fromtime !== null) {
+            console.log(fromtime, e.target.value, loginfo)
+            var report = []
+            for (var i = 0; i < loginfo.length; i++) {
+                for (var j = 0; j < Dashboarddata.length; j++) {
+                    if (loginfo[i].name === Dashboarddata[j].name) {
+                        report.push({
+                            logdata: loginfo[i],
+                            lockerdata: Dashboarddata[j]
+                        })
+                    }
                 }
             }
-        }
-        var reportresult = []
-        for (var a = 0; a < report.length; a++) {
-            var date = report[a].logdata.time.split(",")[0]
-            if (date >= from && date <= to || report[a].lockerdata.user === empid || report[a].lockerdata.name === lockername) {
-                reportresult.push(report[a])
-
+            var reportresult = []
+            for (var a = 0; a < report.length; a++) {
+                var date = report[a].logdata.time.split(",")[0]
+                if (date >= fromtime && date <= e.target.value) {
+                    reportresult.push(report[a])
+                }
+            }
+            console.log(reportresult)
+            if (reportresult.length !== 0) {
+                setReportdata(reportresult)
             }
         }
-        if (reportresult.length !== 0) {
-            setReportdata(reportresult)
+    }
+    const searchbtn = () => {
+        setReportdata([])
+        var empid = document.getElementById("empid").value
+        var lockername = document.getElementById("lockername").value
+        if (empid !== "") {
+            var result = []
+            for (var i = 0; i < reportdata.length; i++) {
+                if (empid === reportdata[i].lockerdata.user) {
+                    result.push(reportdata[i])
+                }
+            }
+            setReportdata(result)
+        } if (lockername !== "") {
+            console.log(lockername)
+            var resultnew = []
+            for (var j = 0; j < reportdata.length; j++) {
+                if (lockername === reportdata[j].lockerdata.name) {
+                    resultnew.push(reportdata[j])
+                }
+            }
+            setReportdata(resultnew)
         }
-
+    }
+    const clearallbtn = () => {
+        window.location.reload()
+        getInfo();
     }
     return (
         <div className='reports'>
@@ -108,14 +138,15 @@ const Reports = () => {
                             <hr />
                             <div className="reports_form">
                                 <label htmlFor="" className="reports_Input_label">From -</label>
-                                <input type="date" className="reports_Input" id='from' />
+                                <input type="date" className="reports_Input" name='from' onChange={(e) => handlechangefromtime(e)} />
                                 <label htmlFor="" className="reports_Input_label">To -</label>
-                                <input type="date" className="reports_Input" id='to' />
+                                <input type="date" className="reports_Input" name='to' onChange={(e) => handlechangetotime(e)} />
                                 <label htmlFor="" className="reports_Input_label">Emp Email -</label>
                                 <input type="text" className="reports_Input" id='empid' />
                                 <label htmlFor="" className="reports_Input_label">Locker No -</label>
                                 <input type="text" className="reports_Input" id='lockername' />
                                 <button className='adminCtrl_lockerInfo_Button' onClick={searchbtn}>Search</button>
+                                <button className='adminCtrl_lockerInfo_Button' onClick={clearallbtn}>Clear All</button>
                             </div>
                         </div>
                         <div className="reports_lockerContainer2">
