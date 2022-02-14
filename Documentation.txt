@@ -1,0 +1,43 @@
+Add Locker
+-----------
+
+URL : http://localhost:3001/locker/insertlocker
+
+METHOD : POST
+
+BODY :  {
+            name,
+            status,
+            subscribe_topic,
+            publish_topic,
+            key,
+            user
+        }
+
+RESPONSE : Data
+
+
+Release Locker User
+-----------------------
+
+URL : http://localhost:3001/locker/updateuser
+
+METHOD : POST
+
+BODY :  {
+            name,
+            user
+        }
+
+RESPONSE : Data
+
+
+Report List
+---------------
+
+URL : http://localhost:3001/locker/logdata
+
+METHOD : GET
+
+
+RESPONSE : Data

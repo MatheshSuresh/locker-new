@@ -200,7 +200,7 @@ const AdminCtrl = () => {
                                 <br />
                                 <label htmlFor="">Select User</label>
                                 <select className='adminCtrl_lockerInfo_Input' id='user' name="user" onChange={handleChange} >
-                                    <option>Select User</option>
+                                    <option value="null">Select User</option>
                                     {userdata.map((data, index) => (
                                         <option className="adminctrl_option" value={data.email} key={index}>{data.email}</option>
                                     ))}
