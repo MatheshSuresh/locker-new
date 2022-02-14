@@ -14,10 +14,10 @@ const Reports = () => {
     const [reportpercentage, setReportpercentage] = useState([]);
     const getInfo = async () => {
         try {
-            const { data } = await axios.get('http://localhost:3001/locker/lockerdata');
-            var user = await axios.get(`http://localhost:3001/user/check`).then((res) => { return res.data })
-            const logdata = await axios.get('http://localhost:3001/locker/logdata').then((res) => { return res.data })
-            const totaldata = await axios.get('http://localhost:3001/locker/occupied').then((res) => { return res.data })
+            const { data } = await axios.get('https://smartlockers.herokuapp.com/locker/lockerdata');
+            var user = await axios.get(`https://smartlockers.herokuapp.com/user/check`).then((res) => { return res.data })
+            const logdata = await axios.get('https://smartlockers.herokuapp.com/locker/logdata').then((res) => { return res.data })
+            const totaldata = await axios.get('https://smartlockers.herokuapp.com/locker/occupied').then((res) => { return res.data })
             setDashboarddata(data);
             setUserdata(user)
             setLogInfo(logdata)

@@ -20,8 +20,8 @@ const Dashboard = () => {
     const getInfo = async () => {
         try {
             var useremail = sessionStorage.getItem("useremail")
-            var user = await axios.get(`http://localhost:3001/user/check`).then((res) => { return res.data })
-            const { data } = await axios.get('http://localhost:3001/locker/lockerdata');
+            var user = await axios.get(`https://smartlockers.herokuapp.com/user/check`).then((res) => { return res.data })
+            const { data } = await axios.get('https://smartlockers.herokuapp.com/locker/lockerdata');
             var checkuser = user.filter((res) => { return res.email === useremail })
             if (checkuser[0].role === "user") {
                 var mydata = await data.filter((response) => { return response.user === useremail })
@@ -68,8 +68,8 @@ const Dashboard = () => {
     }
 
     const handleUnlock = async (values) => {
-        await axios.post("http://localhost:3001/locker/unlock", values)
-        var datanew = await axios.post("http://localhost:3001/locker/unlockupdate", values)
+        await axios.post("https://smartlockers.herokuapp.com/locker/unlock", values)
+        var datanew = await axios.post("https://smartlockers.herokuapp.com/locker/unlockupdate", values)
         if (datanew !== null) {
             setLock("unlock");
             console.log(lock);
@@ -92,7 +92,7 @@ const Dashboard = () => {
             user: user,
             name: lockerInfo.name
         }
-        var datanew = await axios.post("http://localhost:3001/locker/updateuser", data)
+        var datanew = await axios.post("https://smartlockers.herokuapp.com/locker/updateuser", data)
         console.log(datanew)
         if (datanew !== null) {
             setModal(false)
@@ -105,7 +105,7 @@ const Dashboard = () => {
             user: "null",
             name: lockerInfo.name
         }
-        var datanew = await axios.post("http://localhost:3001/locker/updateuser", data)
+        var datanew = await axios.post("https://smartlockers.herokuapp.com/locker/updateuser", data)
         console.log(datanew)
         if (datanew !== null) {
             window.location.reload()

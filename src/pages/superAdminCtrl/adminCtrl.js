@@ -16,8 +16,8 @@ const AdminCtrl = () => {
 
     const getInfo = async () => {
         try {
-            const { data } = await axios.get('http://localhost:3001/locker/lockerdata');
-            const users = await axios.get('http://localhost:3001/user/check');
+            const { data } = await axios.get('https://smartlockers.herokuapp.com/locker/lockerdata');
+            const users = await axios.get('https://smartlockers.herokuapp.com/user/check');
             setUserdata(users.data)
             setDashboarddata(data);
         } catch (err) {
@@ -27,12 +27,12 @@ const AdminCtrl = () => {
 
 
     const unlock = async () => {
-        await axios.post("http://localhost:3001/locker/unlock", DashboardInfo[0]);
+        await axios.post("https://smartlockers.herokuapp.com/locker/unlock", DashboardInfo[0]);
     }
 
     const unlockAll = async () => {
         for (let i = 0; i < Dashboarddata.length; i++) {
-            await axios.post("http://localhost:3001/locker/unlock", Dashboarddata[i]);
+            await axios.post("https://smartlockers.herokuapp.com/locker/unlock", Dashboarddata[i]);
         }
     }
 
@@ -55,7 +55,7 @@ const AdminCtrl = () => {
             key: key,
             user: user
         }
-        var addlockerdata = await axios.post(`http://localhost:3001/locker/insertlocker`, data).then((res) => { return res.data })
+        var addlockerdata = await axios.post(`https://smartlockers.herokuapp.com/locker/insertlocker`, data).then((res) => { return res.data })
         if(addlockerdata !==null){
             window.location.reload()
         }

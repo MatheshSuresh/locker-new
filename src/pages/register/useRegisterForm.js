@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 
 const useRegisterForm = (validateInfo) => {
     let navigate=useNavigate();
-    const API_URL = "http://localhost:3001/user/register"
+    const API_URL = "https://smartlockers.herokuapp.com/user/register"
     const [values,setValues] = useState({
         username:"",
         email:"",

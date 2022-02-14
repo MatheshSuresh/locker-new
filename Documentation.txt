@@ -1,7 +1,7 @@
 Add Locker
 -----------
 
-URL : http://localhost:3001/locker/insertlocker
+URL : https://smartlockers.herokuapp.com/locker/insertlocker
 
 METHOD : POST
 
@@ -20,7 +20,7 @@ RESPONSE : Data
 Release Locker User
 -----------------------
 
-URL : http://localhost:3001/locker/updateuser
+URL : https://smartlockers.herokuapp.com/locker/updateuser
 
 METHOD : POST
 
@@ -35,7 +35,7 @@ RESPONSE : Data
 Report List
 ---------------
 
-URL : http://localhost:3001/locker/logdata
+URL : https://smartlockers.herokuapp.com/locker/logdata
 
 METHOD : GET
 

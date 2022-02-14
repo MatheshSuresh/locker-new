@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const useAdminCtrlForm = (validateInfo) => {
-    const API_URL = "http://localhost:3001/locker/insertlocker"
+    const API_URL = "https://smartlockers.herokuapp.com/locker/insertlocker"
     const [values, setValues] = useState({
         name: "",
         status: "",

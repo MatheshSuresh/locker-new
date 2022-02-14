@@ -9,7 +9,7 @@ import axios from 'axios';
 const Login = () => {
     const { values, handleChange, handleSubmit, errors } = useLoginForm(validateInfo);
     const signin = async () => {
-        var user = await axios.get(`http://localhost:3001/user/check`).then((res) => { return res.data })
+        var user = await axios.get(`https://smartlockers.herokuapp.com/user/check`).then((res) => { return res.data })
         auth.signInWithPopup(provider).then(async (result) => {
             var checkuser = await user.filter((data) => { return data.email === result.user.email })
             if (checkuser.length === 0) {

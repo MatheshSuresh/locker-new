@@ -13,7 +13,7 @@ const Employee = () => {
     
 
     useEffect(async() => {
-      const user = await axios.get(`http://localhost:3001/user/viewall`).then((res) => { return res.data })
+      const user = await axios.get(`https://smartlockers.herokuapp.com/user/viewall`).then((res) => { return res.data })
       setEmployee(user)
     }, [])
     
