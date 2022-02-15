@@ -90,7 +90,8 @@ const Dashboard = () => {
         var user = document.getElementById("user").value
         var data = {
             user: user,
-            name: lockerInfo.name
+            name: lockerInfo.name,
+            userstatus: "occupied",
         }
         var datanew = await axios.post("https://smartlockers.herokuapp.com/locker/updateuser", data)
         console.log(datanew)
@@ -103,7 +104,20 @@ const Dashboard = () => {
     const removeuser = async () => {
         var data = {
             user: "null",
-            name: lockerInfo.name
+            name: lockerInfo.name,
+            userstatus: "available",
+        }
+        var datanew = await axios.post("https://smartlockers.herokuapp.com/locker/updateuser", data)
+        console.log(datanew)
+        if (datanew !== null) {
+            window.location.reload()
+        }
+    }
+    const reserveduser = async () => {
+        var data = {
+            user: "null",
+            name: lockerInfo.name,
+            userstatus: "reserved",
         }
         var datanew = await axios.post("https://smartlockers.herokuapp.com/locker/updateuser", data)
         console.log(datanew)
@@ -154,8 +168,9 @@ const Dashboard = () => {
                                         </select>
                                     </div>
                                     <div className='mt-3'>
+                                        <button className='adminCtrl_lockerInfo_Button m-2' onClick={reserveduser}>Reserved  user</button>
                                         <button className='adminCtrl_lockerInfo_Button' onClick={addlocker}>Add user</button>
-                                        <button className='adminCtrl_lockerInfo_Button m-5' onClick={() => setModal(false)}>Cancel</button>
+                                        <button className='adminCtrl_lockerInfo_Button m-2' onClick={() => setModal(false)}>Cancel</button>
                                     </div>
                                 </div>
                             </div>

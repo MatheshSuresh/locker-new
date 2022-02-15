@@ -29,6 +29,7 @@ const Reports = () => {
                 perc = ((totaldata.length / data.length) * 100).toFixed(3);
             }
             setReportpercentage(Math.round(perc))
+            // 
 
 
         } catch (err) {
@@ -195,7 +196,7 @@ const Reports = () => {
                     <div className='reports_lockerInfo'>
                         <h3>Locker Occupied</h3>
                         <div className='reports_occupied_lockers'>
-                            <div className="reports_occupied_lockers_circular" style={{ background: `conic-gradient(#39B54A ${reportpercentage * 3.6}deg,  #c6c6c6 ${reportpercentage * 3.6}deg)` }}>
+                            <div className="reports_occupied_lockers_circular" style={{ background: `conic-gradient(#ea3a3d ${reportpercentage * 3.6}deg,  #F9B959 ${reportpercentage * 3.6}deg)` }}>
                                 <div className='reports_occupied_lockers_value'>{reportpercentage}%</div>
                             </div>
                         </div>
