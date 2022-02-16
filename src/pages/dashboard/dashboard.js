@@ -6,6 +6,8 @@ import Sidebar from '../../components/sidebar';
 
 
 
+
+
 const Dashboard = () => {
     const [Dashboarddata, setDashboarddata] = useState("");
     const [lock, setLock] = useState("unlock");;
@@ -15,6 +17,7 @@ const Dashboard = () => {
     const [modal, setModal] = useState(false);
     const [userdata, setUserdata] = useState([]);
     const [lockeruserdata, setlockerUserdata] = useState([]);
+    const [activePage, setactivePage] = useState(1);
 
 
     const getInfo = async () => {
@@ -125,7 +128,16 @@ const Dashboard = () => {
             window.location.reload()
         }
     }
+    const indexOfLastPost = activePage * 12;
+    const indexOfFirstPost = indexOfLastPost - 12;
+    const currentPosts = DashboardInfo.slice(indexOfFirstPost, indexOfLastPost);
+    const pageNumbers = [];
+
+    for (let i = 1; i <= Math.ceil(DashboardInfo.length / 12); i++) {
+        pageNumbers.push(i);
+    }
     return (
+
 
         <div className='dashboard'>
             <Sidebar className="dashboard_Sidebar" />
@@ -179,16 +191,16 @@ const Dashboard = () => {
                     : <div className="dashboard_RightbarBottom">
                         <div className="dashboard_lockerContainer">
                             {(() => {
-                                if (DashboardInfo.length !== 0) {
+                                if (currentPosts.length !== 0) {
                                     return (
                                         <>
-                                            {DashboardInfo.map((values, key) => {
+                                            {currentPosts.map((values, key) => {
                                                 return <button className='dashboard_detailget' data-bs-toggle="modal" data-bs-target="#exampleModal"
                                                     onClick={() => setLockerInfodata(values)}>
                                                     <div key={key} className='dashboard_lockerBox'>
                                                         <Icon icon="bx:bxs-lock" className='dashboard_lockerIcon' id={values.status} />
                                                         <h5>{values.name}</h5>
-                                                        <p>{values.status}</p>
+                                                        <p>{values.status === "lock" ? "Locked" : values.status}</p>
                                                         {values.status === "lock" ?
                                                             <button type='button'
                                                                 className='dashboard_unlockButton'
@@ -196,11 +208,28 @@ const Dashboard = () => {
                                                     </div>
                                                 </button >
                                             })}
+
+
+
                                         </>
+
                                     )
                                 }
                             })()}
+                            <div className='row'>
+
+                                <ul className='pagination'>
+                                    {pageNumbers.map(number => (
+                                        <li key={number} className={`page-item ${activePage === number ? "active" : ""}`} style={{ cursor: "pointer" }}>
+                                            <span onClick={() => setactivePage(number)} className='page-link'>
+                                                {number}
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         </div>
+
 
 
                         <div className='dashboard_lockerInfo'>

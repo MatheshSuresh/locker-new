@@ -10,6 +10,7 @@ import Col from 'react-bootstrap/Col'
 const Employee = () => {
 
     const [Employee, setEmployee] = useState('')
+    const [activePage, setactivePage] = useState(1);
 
 
     useEffect(async () => {
@@ -19,6 +20,14 @@ const Employee = () => {
 
 
     console.log(Employee)
+    const indexOfLastPost = activePage * 20;
+    const indexOfFirstPost = indexOfLastPost - 20;
+    const currentPosts = Employee.slice(indexOfFirstPost, indexOfLastPost);
+    const pageNumbers = [];
+
+    for (let i = 1; i <= Math.ceil(Employee.length / 20); i++) {
+        pageNumbers.push(i);
+    }
     return (
         <div className='employee'>
             <Sidebar className="employee_Sidebar" />
@@ -72,14 +81,14 @@ const Employee = () => {
                                 </Row>
                             </>
                     })} */}
-                            <table className="tablelist">
+                            <table className="tablelist m-5">
                                 <tr>
                                     <th>Username</th>
                                     <th>Email</th>
                                 </tr>
-                                {Employee.length !== 0 ?
+                                {currentPosts.length !== 0 ?
 
-                                    Employee.map((values, key) => {
+                                    currentPosts.map((values, key) => {
                                         return <>
                                             <tr>
                                                 <td>{values.username}</td>
@@ -89,6 +98,18 @@ const Employee = () => {
                                     })
                                     : null}
                             </table>
+                            <div className='row m-5'>
+
+                                <ul className='pagination'>
+                                    {pageNumbers.map(number => (
+                                        <li key={number} className={`page-item ${activePage === number ? "active" : ""}`} style={{ cursor: "pointer" }}>
+                                            <span onClick={() => setactivePage(number)} className='page-link'>
+                                                {number}
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         </div>
 
                     </div>

@@ -170,7 +170,7 @@ const Reports = () => {
 
                             </div>
                             <hr />
-                            <table class="reports_lockerContainer_heading2 table" style={{ color: "white" }}>
+                            <table class="reports_lockerContainer_heading2 table" style={{ color: "white",height:"200px" }}>
                                 <thead>
                                     <tr>
                                         <th scope="col">S. No</th>
