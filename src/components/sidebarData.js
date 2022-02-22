@@ -12,7 +12,7 @@ export const SidebarData = [
         link:"/reports"
     },
     {
-        title:"User Profile",
+        title:"Admin Profile",
         icon:<Icon icon="si-glyph:gear-1" />,
         link:"/userprofile"
     },

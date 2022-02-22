@@ -10,7 +10,7 @@ const Userprofile = () => {
         <div className="userprofile_Rightbar">
             <div className="userprofile_RightbarTop">
                 <Icon icon="si-glyph:gear-1" className='userprofile_Icon'/>
-                <h1 className='userprofile_Heading'>User Profile</h1>
+                <h1 className='userprofile_Heading'>Admin Profile</h1>
                 <form>
                     <div className='userprofile_search_Input'>
                     <input
@@ -30,7 +30,7 @@ const Userprofile = () => {
                 <div className="userprofile_RightbarBottomleft" >
                 <div className="userprofile_lockerContainer">
                 <div className='userprofile_lockerContainertop'>
-                <h1 className='userprofile_lockerContainer_heading'>User list</h1>
+                <h1 className='userprofile_lockerContainer_heading'>Admin list</h1>
                 <form>
                     <div className='userprofile_lockerContainer2_search_Input'>
                     <input
