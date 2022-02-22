@@ -107,7 +107,7 @@ const AdminCtrl = () => {
             <div className="adminCtrl_Rightbar">
                 <div className="adminCtrl_RightbarTop">
                     <Icon icon="carbon:user-settings" className='adminCtrl_Icon' />
-                    <h1 className='adminCtrl_Heading'>Super Admin</h1>
+                    <h3 className='adminCtrl_Heading'>Super Admin</h3>
                     <form>
                         <div className='adminCtrl_search_Input'>
                             <input
@@ -124,7 +124,7 @@ const AdminCtrl = () => {
                     <div className="adminCtrl_RightbarBottomleft" >
                         <div className="adminCtrl_lockerContainer">
                             <div className='adminCtrl_lockerContainertop'>
-                                <h1>Employee List</h1>
+                                <h6>Employee List</h6>
                                 <form>
                                     <div className='adminCtrl_lockerContainer2_search_Input'>
                                         <input
@@ -195,7 +195,7 @@ const AdminCtrl = () => {
                                         disabled
                                     />
                                     {errors.name && <p>{errors.name}</p>}
-                                    <br />
+                                    
                                     <label htmlFor="">Status</label>
                                     <input
                                         id='statusedit'
@@ -205,7 +205,7 @@ const AdminCtrl = () => {
 
                                     />
                                     {errors.status && <p>{errors.status}</p>}
-                                    <br />
+                                 
                                     <label htmlFor="">Subscribe Topic</label>
                                     <input
                                         id='subtopicedit'
@@ -215,7 +215,7 @@ const AdminCtrl = () => {
 
                                     />
                                     {errors.subscribe_topic && <p>{errors.subscribe_topic}</p>}
-                                    <br />
+                                   
                                     <label htmlFor="">Publish Topic</label>
                                     <input
                                         id='pubtopicedit'
@@ -224,7 +224,7 @@ const AdminCtrl = () => {
                                         className='adminCtrl_lockerInfo_Input'
                                     />
                                     {errors.publish_topic && <p>{errors.publish_topic}</p>}
-                                    <br />
+                                   
                                     <label htmlFor="">Message</label>
                                     <input
                                         id='keyedit'
@@ -233,32 +233,24 @@ const AdminCtrl = () => {
                                         className='adminCtrl_lockerInfo_Input'
                                     />
                                     {errors.message && <p>{errors.message}</p>}
-                                    <br />
-                                    <label htmlFor="">Select User</label>
+                                   
+                                    {/* <label htmlFor="">Select User</label>
                                     <select className='adminCtrl_lockerInfo_Input' id='useredit' name="user" onChange={handleChange} >
                                         <option value="null">Select User</option>
                                         {userdata.map((data, index) => (
                                             <option className="adminctrl_option" value={data.email} key={index}>{data.email}</option>
                                         ))}
-                                    </select>
-                                    <button className='adminCtrl_lockerInfo_Button' onClick={editlocker}>Edit Locker</button>
+                                    </select> */}
+                                   <div>
+                                   <button className='adminCtrl_lockerInfo_Button' onClick={editlocker}>Edit Locker</button>
                                     <button className='adminCtrl_lockerInfo_Button' onClick={Deletelocker}>Delete Locker</button>
+                                   </div>
                                 </div>
                             </div>
 
                         </div>
                     </div>
                     <div className="adminCtrl_lockerInfoContainer">
-                        <div className='adminCtrl_lockerInfo'>
-                            <div className="adminCtrl_lockerInfotop">
-                                <h3>Locker Occupancy</h3>
-                                <div className='adminCtrl_occupied_lockers'>
-                                    <div className="adminCtrl_occupied_lockers_circular" style={{ background: `conic-gradient(#39B54A ${80 * 3.6}deg,  #c6c6c6 ${80 * 3.6}deg)` }}>
-                                        <div className='adminCtrl_occupied_lockers_value'>80%</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div className='adminCtrl_lockerInfo2'>
                             <h3>Add Locker</h3>
                             <div className='adminCtrl_lockerInfo2_Form' >

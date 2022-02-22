@@ -18,18 +18,10 @@ const Reports = () => {
         try {
             const { data } = await axios.get('https://smartlockers.herokuapp.com/locker/lockerdata');
             const logdata = await axios.get('https://smartlockers.herokuapp.com/locker/logdata').then((res) => { return res.data })
-            const totaldata = await axios.get('https://smartlockers.herokuapp.com/locker/occupied').then((res) => { return res.data })
+            
             setDashboarddata(data);
             setLogInfo(logdata)
-            console.log(data.length, totaldata.length)
-            var perc = "";
-            if (isNaN(data.length) || isNaN(totaldata.length)) {
-                perc = " ";
-            } else {
-                perc = ((totaldata.length / data.length) * 100).toFixed(3);
-            }
-            setReportpercentage(Math.round(perc))
-            // 
+            
 
 
         } catch (err) {
@@ -39,8 +31,21 @@ const Reports = () => {
 
     useEffect(() => {
         getInfo();
-    });
-
+        percentage()
+    }, []);
+    const percentage =async () => {
+        const { data } = await axios.get('https://smartlockers.herokuapp.com/locker/lockerdata');
+        const totaldata = await axios.get('https://smartlockers.herokuapp.com/locker/occupied').then((res) => { return res.data })
+        console.log(data.length, totaldata.length)
+            var perc = "";
+            if (isNaN(data.length) || isNaN(totaldata.length)) {
+                perc = " ";
+            } else {
+                perc = ((totaldata.length / data.length) * 100).toFixed(3);
+            }
+            setReportpercentage(Math.round(perc))
+            // 
+    }
     // useEffect(() => {
     //     setDashboardInfo(Dashboarddata);
     //     if (Dashboarddata.length !== 0) {
@@ -110,7 +115,9 @@ const Reports = () => {
         window.location.reload()
         getInfo();
     }
+    console.log(reportpercentage)
     return (
+
         <div className='reports'>
             <Sidebar className="reports_Sidebar" />
             <div className="reports_Rightbar">
@@ -170,7 +177,7 @@ const Reports = () => {
 
                             </div>
                             <hr />
-                            <table class="reports_lockerContainer_heading2 table" style={{ color: "white",height:"200px" }}>
+                            <table class="reports_lockerContainer_heading2 table" style={{ color: "white", height: "200px" }}>
                                 <thead>
                                     <tr>
                                         <th scope="col">S. No</th>

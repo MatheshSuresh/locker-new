@@ -32,7 +32,10 @@ const Dashboard = () => {
                     setDashboarddata(mydata);
                 }
             } else {
-                setDashboarddata(data);
+                var newdata= data.sort(function(a, b){
+                    return a.name.split(" ")[1] - b.name.split(" ")[1]
+                });
+                setDashboarddata(newdata);
             }
             setUserdata(user)
         } catch (err) {
