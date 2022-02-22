@@ -201,10 +201,9 @@ const Dashboard = () => {
                                                         <Icon icon="bx:bxs-lock" className='dashboard_lockerIcon' id={values.status} />
                                                         <h5>{values.name}</h5>
                                                         <p>{values.status === "lock" ? "Locked" : values.status}</p>
-                                                        {values.status === "lock" ?
-                                                            <button type='button'
-                                                                className='dashboard_unlockButton'
-                                                                onClick={() => handleUnlock(values)}><Icon icon="mdi:toggle-switch-off" className='dashboard_unlockButton_logo' /></button> : ""}
+                                                        <button type='button'
+                                                                className='openbtnnew'
+                                                                onClick={() => handleUnlock(values)}>Open</button>
                                                     </div>
                                                 </button >
                                             })}

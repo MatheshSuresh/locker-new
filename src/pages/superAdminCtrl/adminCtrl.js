@@ -56,7 +56,37 @@ const AdminCtrl = () => {
             user: user
         }
         var addlockerdata = await axios.post(`https://smartlockers.herokuapp.com/locker/insertlocker`, data).then((res) => { return res.data })
-        if(addlockerdata !==null){
+        if (addlockerdata !== null) {
+            window.location.reload()
+        }
+    }
+    const handleChangelockername = async (e) => {
+        var singledata = await Dashboarddata.filter((data) => { return data.name === e.target.value })
+        document.getElementById("lockernameedit").value = singledata[0].name
+        document.getElementById("statusedit").value = singledata[0].status
+        document.getElementById("subtopicedit").value = singledata[0].subscribe_topic
+        document.getElementById("pubtopicedit").value = singledata[0].publish_topic
+        document.getElementById("keyedit").value = singledata[0].key
+        document.getElementById("useredit").innerHTML = `<option value="${singledata[0].user}">${singledata[0].user}</option>`
+    }
+    const editlocker = async () => {
+        var lockername = document.getElementById("lockernameedit").value
+        var status = document.getElementById("statusedit").value
+        var subtopic = document.getElementById("subtopicedit").value
+        var pubtopic = document.getElementById("pubtopicedit").value
+        var key = document.getElementById("keyedit").value
+        var user = document.getElementById("useredit").value
+        var data = {
+            name: lockername,
+            status: status,
+            subscribe_topic: subtopic,
+            publish_topic: pubtopic,
+            key: key,
+            user: user
+        }
+        console.log(data)
+        var addlockerdata = await axios.post(`https://smartlockers.herokuapp.com/locker/updatealldata`, data).then((res) => { return res.data })
+        if (addlockerdata !== null) {
             window.location.reload()
         }
     }
@@ -209,6 +239,78 @@ const AdminCtrl = () => {
                                 <button className='adminCtrl_lockerInfo_Button' onClick={addlocker}>Add Locker</button>
                             </div>
                         </div>
+
+                    </div>
+                    <div className="adminCtrl_lockerInfoContainer">
+                        <div className='adminCtrl_lockerInfo2new'>
+                            <h3>Edit Locker</h3>
+                            <div className='adminCtrl_lockerInfo2_Form' >
+                                <label htmlFor="">Select Locker</label>
+                                <select className='adminCtrl_lockerInfo_Input' onChange={handleChangelockername}>
+                                    <option>Select Locker</option>
+                                    {Dashboarddata.length !== 0 ? Dashboarddata.map((data, index) => (
+                                        <option key={index} value={data.name}>{data.name}</option>
+                                    )) : null}
+                                </select>
+                                <label htmlFor="">Locker Name</label>
+                                <input
+                                    name="name"
+                                    id='lockernameedit'
+                                    type="text"
+                                    className='adminCtrl_lockerInfo_Input'
+                                   disabled
+                                    />
+                                {errors.name && <p>{errors.name}</p>}
+                                <br />
+                                <label htmlFor="">Status</label>
+                                <input
+                                    id='statusedit'
+                                    name="status"
+                                    type="text"
+                                    className='adminCtrl_lockerInfo_Input'
+                                   
+                                    />
+                                {errors.status && <p>{errors.status}</p>}
+                                <br />
+                                <label htmlFor="">Subscribe Topic</label>
+                                <input
+                                    id='subtopicedit'
+                                    name="subscribe_topic"
+                                    type="text"
+                                    className='adminCtrl_lockerInfo_Input'
+                                   
+                                    />
+                                {errors.subscribe_topic && <p>{errors.subscribe_topic}</p>}
+                                <br />
+                                <label htmlFor="">Publish Topic</label>
+                                <input
+                                    id='pubtopicedit'
+                                    name="publish-topic"
+                                    type="text"
+                                    className='adminCtrl_lockerInfo_Input'
+                                    />
+                                {errors.publish_topic && <p>{errors.publish_topic}</p>}
+                                <br />
+                                <label htmlFor="">Message</label>
+                                <input
+                                    id='keyedit'
+                                    name="key"
+                                    type="text"
+                                    className='adminCtrl_lockerInfo_Input'
+                                     />
+                                {errors.message && <p>{errors.message}</p>}
+                                <br />
+                                <label htmlFor="">Select User</label>
+                                <select className='adminCtrl_lockerInfo_Input' id='useredit' name="user" onChange={handleChange} >
+                                    <option value="null">Select User</option>
+                                    {userdata.map((data, index) => (
+                                        <option className="adminctrl_option" value={data.email} key={index}>{data.email}</option>
+                                    ))}
+                                </select>
+                                <button className='adminCtrl_lockerInfo_Button' onClick={editlocker}>Edit Locker</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
