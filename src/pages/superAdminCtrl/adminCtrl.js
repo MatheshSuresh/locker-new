@@ -69,7 +69,7 @@ const AdminCtrl = () => {
         document.getElementById("subtopicedit").value = singledata[0].subscribe_topic
         document.getElementById("pubtopicedit").value = singledata[0].publish_topic
         document.getElementById("keyedit").value = singledata[0].key
-        document.getElementById("useredit").innerHTML = `<option value="${singledata[0].user}">${singledata[0].user}</option>`
+        // document.getElementById("useredit").innerHTML = `<option value="${singledata[0].user}">${singledata[0].user}</option>`
     }
     const editlocker = async () => {
         var lockername = document.getElementById("lockernameedit").value
@@ -77,14 +77,14 @@ const AdminCtrl = () => {
         var subtopic = document.getElementById("subtopicedit").value
         var pubtopic = document.getElementById("pubtopicedit").value
         var key = document.getElementById("keyedit").value
-        var user = document.getElementById("useredit").value
+        // var user = document.getElementById("useredit").value
         var data = {
             name: lockername,
             status: status,
             subscribe_topic: subtopic,
             publish_topic: pubtopic,
             key: key,
-            user: user
+            // user: user
         }
         var addlockerdata = await axios.post(`https://smartlockers.herokuapp.com/locker/updatealldata`, data).then((res) => { return res.data })
         if (addlockerdata !== null) {
