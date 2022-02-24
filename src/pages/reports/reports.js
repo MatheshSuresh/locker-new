@@ -18,10 +18,9 @@ const Reports = () => {
         try {
             const { data } = await axios.get('https://smartlockers.herokuapp.com/locker/lockerdata');
             const logdata = await axios.get('https://smartlockers.herokuapp.com/locker/logdata').then((res) => { return res.data })
-            
             setDashboarddata(data);
             setLogInfo(logdata)
-            
+
 
 
         } catch (err) {
@@ -30,21 +29,24 @@ const Reports = () => {
     }
 
     useEffect(() => {
-        getInfo();
+
         percentage()
+        setTimeout(() => {
+            getInfo();
+        }, 2000)
     }, []);
-    const percentage =async () => {
+    const percentage = async () => {
+
         const { data } = await axios.get('https://smartlockers.herokuapp.com/locker/lockerdata');
         const totaldata = await axios.get('https://smartlockers.herokuapp.com/locker/occupied').then((res) => { return res.data })
-        console.log(data.length, totaldata.length)
-            var perc = "";
-            if (isNaN(data.length) || isNaN(totaldata.length)) {
-                perc = " ";
-            } else {
-                perc = ((totaldata.length / data.length) * 100).toFixed(3);
-            }
-            setReportpercentage(Math.round(perc))
-            // 
+        var perc = "";
+        if (isNaN(data.length) || isNaN(totaldata.length)) {
+            perc = " ";
+        } else {
+            perc = ((totaldata.length / data.length) * 100).toFixed(3);
+        }
+        setReportpercentage(Math.round(perc))
+        // 
     }
     // useEffect(() => {
     //     setDashboardInfo(Dashboarddata);

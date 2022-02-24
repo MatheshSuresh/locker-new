@@ -16,7 +16,19 @@ const Userprofile = () => {
     useEffect(() => {
         getInfo();
     }, []);
-
+    const adduser = async () => {
+        var name = document.getElementById("name").value
+        var email = document.getElementById("email").value
+        var password = document.getElementById("password").value
+        var data = {
+            username: name,
+            email: email,
+            password: password
+        }
+        var adduser = await axios.post("https://smartlockers.herokuapp.com/user/register", data).then((res) => { return res.data })
+        alert(adduser.message)
+        window.location.reload()
+    }
     return (
         <div className='userprofile'>
             <Sidebar className="userprofile_Sidebar" />
@@ -85,18 +97,16 @@ const Userprofile = () => {
                             <h3>Add User</h3>
                             <img className="userprofile_profileImg" src="./assets/profile.png" alt="" />
                         </div>
-                        <form className='userprofile_Form'>
+                        <div className='userprofile_Form'>
                             <label>User Name</label><br />
-                            <input type="text" className='userprofile_Input'></input>
+                            <input type="text" id='name' className='userprofile_Input'></input>
                             <br />
+                            <label>Email</label><br />
+                            <input type="type" id='email' className='userprofile_Input'></input><br />
                             <label>Password</label><br />
-                            <input type="password" className='userprofile_Input'></input><br />
-                            <label>Confirm Password</label><br />
-                            <input type="password" className='userprofile_Input'></input><br />
-                            <label>User Profile</label><br />
-                            <input type="type" className='userprofile_Input'></input><br />
-                            <button className='userprofile_input_Button'>Submit</button>
-                        </form>
+                            <input type="password" id='password' className='userprofile_Input'></input><br />
+                            <button className='userprofile_input_Button' onClick={adduser}>Submit</button>
+                        </div>
                     </div>
                 </div>
             </div>
