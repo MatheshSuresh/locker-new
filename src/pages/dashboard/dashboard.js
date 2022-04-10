@@ -9,7 +9,7 @@ import Sidebar from '../../components/sidebar';
 
 
 const Dashboard = () => {
-    const [Dashboarddata, setDashboarddata] = useState("");
+    const [Dashboarddata, setDashboarddata] = useState([]);
     const [lock, setLock] = useState("unlock");;
     const [lockerInfo, setLockerInfo] = useState([]);
     const [DashboardInfo, setDashboardInfo] = useState(Dashboarddata);
@@ -18,6 +18,7 @@ const Dashboard = () => {
     const [userdata, setUserdata] = useState([]);
     const [lockeruserdata, setlockerUserdata] = useState([]);
     const [activePage, setactivePage] = useState(1);
+    const [open, setopen] = useState('Close');
 
 
     const getInfo = async () => {
@@ -25,16 +26,21 @@ const Dashboard = () => {
             var useremail = sessionStorage.getItem("useremail")
             var user = await axios.get(`https://smartlockers.herokuapp.com/user/check`).then((res) => { return res.data })
             const { data } = await axios.get('https://smartlockers.herokuapp.com/locker/lockerdata');
+            //    var emty  = await axios.get('http://localhost:3001/machineStatus/?ip=192.168.0.7&port=23&type=operate&address=15');
+            //    console.log(emty);
             var checkuser = user.filter((res) => { return res.email === useremail })
             if (checkuser[0].role === "user") {
                 var mydata = await data.filter((response) => { return response.user === useremail })
                 if (mydata.length !== 0) {
+                    // console.log(mydata);
                     setDashboarddata(mydata);
                 }
             } else {
                 var newdata= data.sort(function(a, b){
                     return a.name.split(" ")[1] - b.name.split(" ")[1]
                 });
+                // console.log(newdata);
+   
                 setDashboarddata(newdata);
             }
             setUserdata(user)
@@ -74,8 +80,21 @@ const Dashboard = () => {
     }
 
     const handleUnlock = async (values) => {
+        let data = values
+        console.log(data);
+        let locker = data.name.split(' ',2)
+        console.log(locker[1]);
+        let set = await axios.get(`http://localhost:3001/machineStatus/?ip=192.168.0.7&port=23&type=operate&address=${locker[1]}`);
+        console.log(set.data);
+        // set.data === 'OK'?setopen('opened'):setopen('close')
+
         await axios.post("https://smartlockers.herokuapp.com/locker/unlock", values)
-        var datanew = await axios.post("https://smartlockers.herokuapp.com/locker/unlockupdate", values)
+        var datanew = await axios.post("https://smartlockers.herokuapp.com/locker/unlockupdate",  values)
+        // var datanew = await axios.post("http://localhost:3001/locker/unlockupdate",  values)
+
+
+      
+        console.log(datanew);
         if (datanew !== null) {
             setLock("unlock");
             console.log(lock);
@@ -135,7 +154,8 @@ const Dashboard = () => {
     const indexOfFirstPost = indexOfLastPost - 12;
     const currentPosts = DashboardInfo.slice(indexOfFirstPost, indexOfLastPost);
     const pageNumbers = [];
-
+    // console.log(currentPosts);
+    
     for (let i = 1; i <= Math.ceil(DashboardInfo.length / 12); i++) {
         pageNumbers.push(i);
     }
@@ -198,12 +218,15 @@ const Dashboard = () => {
                                     return (
                                         <>
                                             {currentPosts.map((values, key) => {
-                                                return <button className='dashboard_detailget' data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                return <button className='dashboard_detailget'  key={key} data-bs-toggle="modal" data-bs-target="#exampleModal"
                                                     onClick={() => setLockerInfodata(values)}>
-                                                    <div key={key} className='dashboard_lockerBox'>
+                                                    <div className='dashboard_lockerBox'>
                                                         <Icon icon="bx:bxs-lock" className='dashboard_lockerIcon' id={values.status} />
                                                         <h5>{values.name}</h5>
-                                                        <p>{values.status === "lock" ? "Locked" : values.status}</p>
+                                                        <p>{values.status === "open" ? "opened" : 'closed'}</p>
+
+                                                        {/* <p>{values.status}</p> */}
+                                                        {/* <p>{open}</p> */}
                                                         <button type='button'
                                                                 className='openbtnnew'
                                                                 onClick={() => handleUnlock(values)}>Open</button>

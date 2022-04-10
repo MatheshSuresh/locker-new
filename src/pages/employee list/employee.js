@@ -19,7 +19,6 @@ const Employee = () => {
     }, [])
 
 
-    console.log(Employee)
     const indexOfLastPost = activePage * 20;
     const indexOfFirstPost = indexOfLastPost - 20;
     const currentPosts = Employee.slice(indexOfFirstPost, indexOfLastPost);
