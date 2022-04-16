@@ -19,6 +19,7 @@ const Dashboard = () => {
     const [lockeruserdata, setlockerUserdata] = useState([]);
     const [activePage, setactivePage] = useState(1);
     const [open, setopen] = useState('Close');
+    const [lockStatus, setlockStatus] = useState([]);
 
 
     const getInfo = async () => {
@@ -26,13 +27,27 @@ const Dashboard = () => {
             var useremail = sessionStorage.getItem("useremail")
             var user = await axios.get(`https://smartlockers.herokuapp.com/user/check`).then((res) => { return res.data })
             const { data } = await axios.get('https://smartlockers.herokuapp.com/locker/lockerdata');
-            //    var emty  = await axios.get('http://localhost:3001/machineStatus/?ip=192.168.0.7&port=23&type=operate&address=15');
-            //    console.log(emty);
+            console.log(data);
+            var lockstatus1 = await axios.get(`https://smartlockers.herokuapp.com/machineStatus/?ip=192.168.0.7&port=23&type=status&address=1`).then((res) => { return res.data })
+            var lockstatus2 = await axios.get(`https://smartlockers.herokuapp.com/machineStatus/?ip=192.168.0.7&port=23&type=status&address=2`).then((res) => { return res.data })
+                  
+            var lockstatus = lockstatus1.concat(lockstatus2)
+            setlockStatus(lockstatus)
+            console.log(lockstatus);
+            var lock_data_api = await lockstatus.filter((response) => { return response.locker_address})
+
+         var check =   await lockstatus.filter((res) => { 
+                return  data.filter((response) => { return res.locker_address === response.locker_address})
+            })
+            console.log(check);
+            // var lock_data = []
+           var lock_data = await data.filter((response) => { return response.locker_address})
+                // console.log(lock_data);
             var checkuser = user.filter((res) => { return res.email === useremail })
             if (checkuser[0].role === "user") {
                 var mydata = await data.filter((response) => { return response.user === useremail })
                 if (mydata.length !== 0) {
-                    // console.log(mydata);
+                    console.log(mydata);
                     setDashboarddata(mydata);
                 }
             } else {
@@ -49,12 +64,14 @@ const Dashboard = () => {
         }
         setTimeout(() => {
             getInfo()
-        }, 2000)
+        }, 1000)
 
     }
 
     useEffect(() => {
         getInfo();
+        
+        
     }, []);
 
     useEffect(() => {
@@ -79,18 +96,20 @@ const Dashboard = () => {
         }
     }
 
-    const handleUnlock = async (values) => {
-        let data = values
-        console.log(data);
-        let locker = data.name.split(' ',2)
-        console.log(locker[1]);
-        let set = await axios.get(`http://localhost:3001/machineStatus/?ip=192.168.0.7&port=23&type=operate&address=${locker[1]}`);
-        console.log(set.data);
+    const handleUnlock = async (values,key) => {
+        // let data = values
+        // console.log(data);
+        // let locker = data.name.split(' ',2)
+        // console.log(locker[1]);
+        console.log(values.locker_address);
+        // console.log(key);
+        let set = await axios.get(`https://smartlockers.herokuapp.com/machineStatus/?ip=192.168.0.7&port=23&type=operate&address=${values.locker_address}`);
+        console.log(set);
         // set.data === 'OK'?setopen('opened'):setopen('close')
 
-        await axios.post("https://smartlockers.herokuapp.com/locker/unlock", values)
+        // await axios.post("https://smartlockers.herokuapp.com/locker/unlock", values)
         var datanew = await axios.post("https://smartlockers.herokuapp.com/locker/unlockupdate",  values)
-        // var datanew = await axios.post("http://localhost:3001/locker/unlockupdate",  values)
+        // var datanew = await axios.post("https://smartlockers.herokuapp.com/locker/unlockupdate",  values)
 
 
       
@@ -212,8 +231,9 @@ const Dashboard = () => {
                         </div>
                     </div>
                     : <div className="dashboard_RightbarBottom">
+                        <div style={{display:'flex',flexDirection:'column',alignItems:'center'}}>
                         <div className="dashboard_lockerContainer">
-                            {(() => {
+                         {(() => {
                                 if (currentPosts.length !== 0) {
                                     return (
                                         <>
@@ -221,15 +241,57 @@ const Dashboard = () => {
                                                 return <button className='dashboard_detailget'  key={key} data-bs-toggle="modal" data-bs-target="#exampleModal"
                                                     onClick={() => setLockerInfodata(values)}>
                                                     <div className='dashboard_lockerBox'>
-                                                        <Icon icon="bx:bxs-lock" className='dashboard_lockerIcon' id={values.status} />
+                                                       {values.status === 'close'?<Icon icon="bx:bxs-lock" className='dashboard_lockerIcon' id={values.status} />:
+                                                        <Icon icon="bxs:lock-open" className='dashboard_lockerIcon' id={values.status} />
+                                                       
+                                                       } 
+                                                       
                                                         <h5>{values.name}</h5>
-                                                        <p>{values.status === "open" ? "opened" : 'closed'}</p>
+                                                        
 
-                                                        {/* <p>{values.status}</p> */}
-                                                        {/* <p>{open}</p> */}
+                                                        <p>{values.status}</p>
+                                                       
                                                         <button type='button'
                                                                 className='openbtnnew'
                                                                 onClick={() => handleUnlock(values)}>Open</button>
+                                                    </div>
+                                                </button >
+                                            })}
+
+x
+
+                                        </>
+
+                                    )
+                                }
+                            })()} 
+                            
+
+                            {/* {(() => {
+                                if (currentPosts.length !== 0) {
+                                    return (
+                                        <>
+                                            {currentPosts.map((values, key) => {
+                                             
+                                                return  <button className='dashboard_detailget'  key={key} data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                    onClick={() => setLockerInfodata(values)}>
+                                                    <div className={values.status === 1?'dashboard_lockerBox':'dashboard_lockerBox dashboard_lockerBox_open'}>
+                                                       {values.status === 1?<Icon icon="fa-solid:lock" className='dashboard_lockerIcon' id={values} />:
+                                                        <Icon style={{transform: 'scaleX(-1)',color:'red'}} icon="fa-solid:lock-open" data-flip="horizontal" className='dashboard_lockerIcon' id={values} />
+                                                       
+                                                       } 
+                                                       
+                                                        <h5>{`Locker ${values.id}`}</h5>
+                                                        
+
+                                                     
+                                                        <p style={{color:'white'}} key={key}>{values.status === 1 ?
+                                                        `Closed`:
+                                                        'Opened'}</p>
+                                                                        
+                                                                        {values.status === 1?<button type='button'
+                                                                className='openbtnnew'
+                                                                onClick={() => handleUnlock(values,values.id)}>Open</button>:null}
                                                     </div>
                                                 </button >
                                             })}
@@ -240,22 +302,40 @@ const Dashboard = () => {
 
                                     )
                                 }
-                            })()}
+                            })()} 
+                         */}
+
+
+                                {/* <div>
+                                {lockStatus.map((values, key) => {
+                                  return  <p style={{color:'white'}} key={key}>{values === 1 ?
+                                    `${key+1} Closed`:
+                                    'Opened'}</p>
+                                })
+
+                                }
+
+                                </div>
+                  */}
+
+
+
+                        </div>
+                        <div style={{margin:'0 0 0 120px'}}>
                             <div className='row'>
 
-                                <ul className='pagination'>
-                                    {pageNumbers.map(number => (
-                                        <li key={number} className={`page-item ${activePage === number ? "active" : ""}`} style={{ cursor: "pointer" }}>
-                                            <span onClick={() => setactivePage(number)} className='page-link'>
-                                                {number}
-                                            </span>
-                                        </li>
-                                    ))}
-                                </ul>
+                            <ul className='pagination'>
+                                {pageNumbers.map(number => (
+                                    <li key={number} className={`page-item ${activePage === number ? "active" : ""}`} style={{ cursor: "pointer" }}>
+                                        <span onClick={() => setactivePage(number)} className='page-link'>
+                                            {number}
+                                        </span>
+                                    </li>
+                                ))}
+                            </ul>
                             </div>
                         </div>
-
-
+                        </div>
 
                         <div className='dashboard_lockerInfo'>
                             <h3>Occupied locker details</h3>

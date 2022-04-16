@@ -8,9 +8,29 @@ import axios from 'axios';
 
 const Login = () => {
     const { values, handleChange, handleSubmit, errors } = useLoginForm(validateInfo);
+    let user 
     const signin = async () => {
-        var user = await axios.get(`https://smartlockers.herokuapp.com/user/check`).then((res) => { return res.data })
-        auth.signInWithPopup(provider).then(async (result) => {
+        var user1 = await axios.get(`https://smartlockers.herokuapp.com/user/check`).then((res) => { return res.data })
+        user = user1
+        // auth.signInWithPopup(provider).then(async (result) => {
+        //     var checkuser = await user.filter((data) => { return data.email === result.user.email })
+        //     if (checkuser.length === 0) {
+        //         alert("You Are Not Valid User...")
+        //     } else {
+        //         sessionStorage.setItem('auth', JSON.stringify(checkuser[0].password))
+        //         sessionStorage.setItem('useremail', checkuser[0].email)
+        //         window.location.replace("/dashboard")
+        //     }
+
+        // }).catch(alert)
+
+        console.log(user1);
+            sessionStorage.setItem('auth', JSON.stringify(user1[0].password))
+              sessionStorage.setItem('useremail', user1[0].email)
+              window.location.replace("/dashboard")
+    }
+    const signinWithGoogle = async ()=>{
+             auth.signInWithPopup(provider).then(async (result) => {
             var checkuser = await user.filter((data) => { return data.email === result.user.email })
             if (checkuser.length === 0) {
                 alert("You Are Not Valid User...")
@@ -21,6 +41,7 @@ const Login = () => {
             }
 
         }).catch(alert)
+
     }
     return (
         <div className='login_page'>
@@ -57,9 +78,9 @@ const Login = () => {
                     {errors.password && <p>{errors.password}</p>}
                 </div>
                 <button type="submit"
-                    className="login_Submit">Sign In</button>
+                    className="login_Submit" onClick={signin}> Sign In</button>
                 <p>OR</p>
-                <button className='goolgle_Login' onClick={signin}>
+                <button className='goolgle_Login' onClick={signinWithGoogle}>
                     <Icon icon="flat-color-icons:google" className='google_Logo' />
                     Login wih Google</button>
                 <a className="forgot" href="/forgotpass">Forgot Password</a>

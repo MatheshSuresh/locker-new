@@ -28,12 +28,18 @@ const AdminCtrl = () => {
 
 
     const unlock = async () => {
-        await axios.post("https://smartlockers.herokuapp.com/locker/unlock", DashboardInfo[0]);
+        // await axios.post("https://smartlockers.herokuapp.com/locker/unlock", DashboardInfo[0]);
+        console.log(locker);
+        let set = await axios.get(`https://smartlockers.herokuapp.com/machineStatus/?ip=192.168.0.7&port=23&type=operate&address=${locker}`);
+        console.log(set)
     }
 
     const unlockAll = async () => {
+        console.log(Dashboarddata);
         for (let i = 0; i < Dashboarddata.length; i++) {
-            await axios.post("https://smartlockers.herokuapp.com/locker/unlock", Dashboarddata[i]);
+            // await axios.post("https://smartlockers.herokuapp.com/locker/unlock", Dashboarddata[i]);
+            console.log(Dashboarddata[i].locker_address);
+            await axios.get(`https://smartlockers.herokuapp.com/machineStatus/?ip=192.168.0.7&port=23&type=operate&address=${Dashboarddata[i].locker_address}`);
         }
     }
 
@@ -50,9 +56,9 @@ const AdminCtrl = () => {
         var user = document.getElementById("user").value
         var data = {
             name: lockername,
-            status: status,
-            subscribe_topic: subtopic,
-            publish_topic: pubtopic,
+            ip_address: status,
+            port_address: subtopic,
+            locker_address: pubtopic,
             key: key,
             user: user
         }
@@ -65,9 +71,9 @@ const AdminCtrl = () => {
         var singledata = await Dashboarddata.filter((data) => { return data.name === e.target.value })
         seteditdata(singledata)
         document.getElementById("lockernameedit").value = singledata[0].name
-        document.getElementById("statusedit").value = singledata[0].status
-        document.getElementById("subtopicedit").value = singledata[0].subscribe_topic
-        document.getElementById("pubtopicedit").value = singledata[0].publish_topic
+        document.getElementById("statusedit").value = singledata[0].ip_address
+        document.getElementById("subtopicedit").value = singledata[0].port_address
+        document.getElementById("pubtopicedit").value = singledata[0].locker_address
         document.getElementById("keyedit").value = singledata[0].key
         // document.getElementById("useredit").innerHTML = `<option value="${singledata[0].user}">${singledata[0].user}</option>`
     }
@@ -148,18 +154,19 @@ const AdminCtrl = () => {
                                     <select onChange={(e) => {
                                         const lock = e.target.value;
                                         setLocker(lock);
-                                        console.log(lock);
-                                        setDashboardInfo(
-                                            Dashboarddata.filter((item) =>
-                                                item.name.toLowerCase().match(locker.toLowerCase())));
-                                        console.log(DashboardInfo[0]);
+                                        console.log(locker);
+                                        // setDashboardInfo(
+                                        //     Dashboarddata.filter((item) =>
+                                        //         item.name.toLowerCase().match(locker.toLowerCase())));
+                                        // console.log(DashboardInfo[0]);
                                     }}>
+                                         <option>Select Locker</option>
                                         {(() => {
                                             if (Dashboarddata.length !== 0) {
                                                 return (
                                                     <>
                                                         {Dashboarddata.map((values, key) => {
-                                                            return <option className="adminctrl_option" key={key} value={values.name}>{values.name}</option>
+                                                            return <option className="adminctrl_option" key={key} value={values.locker_address}>{values.name}</option>
                                                         })}
                                                     </>
                                                 )
@@ -196,7 +203,7 @@ const AdminCtrl = () => {
                                     />
                                     {errors.name && <p>{errors.name}</p>}
                                     
-                                    <label htmlFor="">Status</label>
+                                    <label htmlFor="">IP Address</label>
                                     <input
                                         id='statusedit'
                                         name="status"
@@ -206,7 +213,7 @@ const AdminCtrl = () => {
                                     />
                                     {errors.status && <p>{errors.status}</p>}
                                  
-                                    <label htmlFor="">Subscribe Topic</label>
+                                    <label htmlFor="">Port Address</label>
                                     <input
                                         id='subtopicedit'
                                         name="subscribe_topic"
@@ -216,7 +223,7 @@ const AdminCtrl = () => {
                                     />
                                     {errors.subscribe_topic && <p>{errors.subscribe_topic}</p>}
                                    
-                                    <label htmlFor="">Publish Topic</label>
+                                    <label htmlFor="">Locker Address</label>
                                     <input
                                         id='pubtopicedit'
                                         name="publish-topic"
@@ -264,7 +271,7 @@ const AdminCtrl = () => {
                                     onChange={handleChange} />
                                 {errors.name && <p>{errors.name}</p>}
                                 <br />
-                                <label htmlFor="">Status</label>
+                                <label htmlFor="">Ip Address</label>
                                 <input
                                     id='status'
                                     name="status"
@@ -274,21 +281,21 @@ const AdminCtrl = () => {
                                     onChange={handleChange} />
                                 {errors.status && <p>{errors.status}</p>}
                                 <br />
-                                <label htmlFor="">Subscribe Topic</label>
+                                <label htmlFor="">Port Address</label>
                                 <input
                                     id='subtopic'
                                     name="subscribe_topic"
-                                    type="text"
+                                    type="number"
                                     className='adminCtrl_lockerInfo_Input'
                                     value={values.subscribe_topic}
                                     onChange={handleChange} />
                                 {errors.subscribe_topic && <p>{errors.subscribe_topic}</p>}
                                 <br />
-                                <label htmlFor="">Publish Topic</label>
+                                <label htmlFor="">Locker Address</label>
                                 <input
                                     id='pubtopic'
                                     name="publish-topic"
-                                    type="text"
+                                    type="number"
                                     className='adminCtrl_lockerInfo_Input'
 
                                     onChange={handleChange} />

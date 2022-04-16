@@ -23,9 +23,11 @@ const Userprofile = () => {
         var data = {
             username: name,
             email: email,
-            password: password
+            password: password,
+            role:'admin'
         }
         var adduser = await axios.post("https://smartlockers.herokuapp.com/user/register", data).then((res) => { return res.data })
+        console.log(adduser);
         alert(adduser.message)
         window.location.reload()
     }
