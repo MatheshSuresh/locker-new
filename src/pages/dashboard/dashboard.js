@@ -30,8 +30,8 @@ const Dashboard = () => {
             var user = await axios.get(`http://3.239.93.89:3001/user/check`).then((res) => { return res.data })
             const { data } = await axios.get('http://3.239.93.89:3001/locker/lockerdata');
             // console.log(data);//124.123.67.202:8084/
-            var lockstatus1 = await axios.get(`http://3.239.93.89:3001/machineStatus/?ip=124.123.67.202&port=8084&type=status&address=1`).then((res) => { return res.data })
-            var lockstatus2 = await axios.get(`http://3.239.93.89:3001/openLock/?ip=124.123.67.202&port=8084&type=status&address=2`).then((res) => { return res.data })
+            var lockstatus1 = await axios.get(`http://3.239.93.89:3001/machineStatus1/?ip=124.123.67.202&port=8084&type=status&address=1`).then((res) => { return res.data })
+            var lockstatus2 = await axios.get(`http://3.239.93.89:3001/machineStatus2/?ip=124.123.67.202&port=8084&type=status&address=2`).then((res) => { return res.data })
 
             var lockstatus = lockstatus1.concat(lockstatus2)
 
