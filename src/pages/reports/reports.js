@@ -16,8 +16,8 @@ const Reports = () => {
 
     const getInfo = async () => {
         try {
-            const { data } = await axios.get('https://smartlockers.herokuapp.com/locker/lockerdata');
-            const logdata = await axios.get('https://smartlockers.herokuapp.com/locker/logdata').then((res) => { return res.data })
+            const { data } = await axios.get('http://3.239.93.89:3001/locker/lockerdata');
+            const logdata = await axios.get('http://3.239.93.89:3001/locker/logdata').then((res) => { return res.data })
             setDashboarddata(data);
             setLogInfo(logdata)
 
@@ -37,8 +37,8 @@ const Reports = () => {
     }, []);
     const percentage = async () => {
 
-        const { data } = await axios.get('https://smartlockers.herokuapp.com/locker/lockerdata');
-        const totaldata = await axios.get('https://smartlockers.herokuapp.com/locker/occupied').then((res) => { return res.data })
+        const { data } = await axios.get('http://3.239.93.89:3001/locker/lockerdata');
+        const totaldata = await axios.get('http://3.239.93.89:3001/locker/occupied').then((res) => { return res.data })
         var perc = "";
         if (isNaN(data.length) || isNaN(totaldata.length)) {
             perc = " ";

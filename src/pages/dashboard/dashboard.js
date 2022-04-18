@@ -20,29 +20,47 @@ const Dashboard = () => {
     const [activePage, setactivePage] = useState(1);
     const [open, setopen] = useState('Close');
     const [lockStatus, setlockStatus] = useState([]);
+    const [lockList, setlockList] = useState([]);
+    const pageNumbers = [];
 
 
     const getInfo = async () => {
         try {
             var useremail = sessionStorage.getItem("useremail")
-            var user = await axios.get(`https://smartlockers.herokuapp.com/user/check`).then((res) => { return res.data })
-            const { data } = await axios.get('https://smartlockers.herokuapp.com/locker/lockerdata');
-            console.log(data);
-            var lockstatus1 = await axios.get(`https://smartlockers.herokuapp.com/machineStatus/?ip=192.168.0.7&port=23&type=status&address=1`).then((res) => { return res.data })
-            var lockstatus2 = await axios.get(`https://smartlockers.herokuapp.com/machineStatus/?ip=192.168.0.7&port=23&type=status&address=2`).then((res) => { return res.data })
-                  
-            var lockstatus = lockstatus1.concat(lockstatus2)
-            setlockStatus(lockstatus)
-            console.log(lockstatus);
-            var lock_data_api = await lockstatus.filter((response) => { return response.locker_address})
+            var user = await axios.get(`http://3.239.93.89:3001/user/check`).then((res) => { return res.data })
+            const { data } = await axios.get('http://3.239.93.89:3001/locker/lockerdata');
+            // console.log(data);//124.123.67.202:8084/
+            var lockstatus1 = await axios.get(`http://3.239.93.89:3001/machineStatus/?ip=124.123.67.202&port=8084&type=status&address=1`).then((res) => { return res.data })
+            var lockstatus2 = await axios.get(`http://3.239.93.89:3001/openLock/?ip=124.123.67.202&port=8084&type=status&address=2`).then((res) => { return res.data })
 
-         var check =   await lockstatus.filter((res) => { 
-                return  data.filter((response) => { return res.locker_address === response.locker_address})
+            var lockstatus = lockstatus1.concat(lockstatus2)
+
+            setlockStatus(lockstatus)
+
+            var result = lockStatus.filter(({ locker_address: id1 }) => data.some(({ locker_address: id2 }) => { return id1 === id2 }))
+            var test = result.concat(data)
+            if (lockstatus.length !== 0) {
+                var finalarray = []
+                for (var i = 0; i < lockstatus.length; i++) {
+                    for (var j = 0; j < test.length; j++) {
+                        if (lockstatus[i].locker_address === Number(test[j].locker_address)) {
+                            finalarray.push(lockstatus[i])
+                        }
+                    }
+                }
+
+            }
+            console.log(finalarray);
+            var filterData = []
+             data.forEach((e)=>{
+                finalarray.forEach((f)=>{
+                    if(e.locker_address == f.locker_address){
+                        filterData.push(Object.assign({},e,f))
+                    }
+                })
             })
-            console.log(check);
-            // var lock_data = []
-           var lock_data = await data.filter((response) => { return response.locker_address})
-                // console.log(lock_data);
+            console.log(filterData);
+            setlockStatus(filterData)
             var checkuser = user.filter((res) => { return res.email === useremail })
             if (checkuser[0].role === "user") {
                 var mydata = await data.filter((response) => { return response.user === useremail })
@@ -51,27 +69,36 @@ const Dashboard = () => {
                     setDashboarddata(mydata);
                 }
             } else {
-                var newdata= data.sort(function(a, b){
+                var newdata = data.sort(function (a, b) {
                     return a.name.split(" ")[1] - b.name.split(" ")[1]
                 });
-                // console.log(newdata);
-   
+
+
                 setDashboarddata(newdata);
             }
             setUserdata(user)
         } catch (err) {
             console.log(err)
         }
+
+    
+     
         setTimeout(() => {
             getInfo()
-        }, 1000)
+        }, 3500)
 
     }
-
+    const indexOfLastPost = activePage * 12;
+    const indexOfFirstPost = indexOfLastPost - 12;
+    const currentPosts = lockStatus.slice(indexOfFirstPost, indexOfLastPost);
+    // setlockList(currentPosts)
+    for (let i = 1; i <= Math.ceil(lockStatus.length / 12); i++) {
+        pageNumbers.push(i);
+    }
     useEffect(() => {
         getInfo();
-        
-        
+
+
     }, []);
 
     useEffect(() => {
@@ -96,28 +123,29 @@ const Dashboard = () => {
         }
     }
 
-    const handleUnlock = async (values,key) => {
+    const handleUnlock = async (values, key) => {
         // let data = values
         // console.log(data);
         // let locker = data.name.split(' ',2)
         // console.log(locker[1]);
-        console.log(values.locker_address);
+        console.log(values, key);
         // console.log(key);
-        let set = await axios.get(`https://smartlockers.herokuapp.com/machineStatus/?ip=192.168.0.7&port=23&type=operate&address=${values.locker_address}`);
+        // http://3.239.93.89:3001/machineStatus/?ip=124.123.67.202&port=8084&type=status&address=1
+        let set = await axios.get(`http://3.239.93.89:3001/openLock/?ip=124.123.67.202&port=8084&type=operate&address=${values.locker_address}`);
         console.log(set);
         // set.data === 'OK'?setopen('opened'):setopen('close')
 
-        // await axios.post("https://smartlockers.herokuapp.com/locker/unlock", values)
-        var datanew = await axios.post("https://smartlockers.herokuapp.com/locker/unlockupdate",  values)
-        // var datanew = await axios.post("https://smartlockers.herokuapp.com/locker/unlockupdate",  values)
+        // await axios.post("http://3.239.93.89:3001/locker/unlock", values)
+        var datanew = await axios.post("http://3.239.93.89:3001/locker/unlockupdate", values)
+        // var datanew = await axios.post("http://3.239.93.89:3001/locker/unlockupdate",  values)
 
 
-      
+
         console.log(datanew);
         if (datanew !== null) {
             setLock("unlock");
             console.log(lock);
-            getInfo();
+            // getInfo();
         }
     }
 
@@ -137,7 +165,7 @@ const Dashboard = () => {
             name: lockerInfo.name,
             userstatus: "occupied",
         }
-        var datanew = await axios.post("https://smartlockers.herokuapp.com/locker/updateuser", data)
+        var datanew = await axios.post("http://3.239.93.89:3001/locker/updateuser", data)
         console.log(datanew)
         if (datanew !== null) {
             setModal(false)
@@ -151,7 +179,7 @@ const Dashboard = () => {
             name: lockerInfo.name,
             userstatus: "available",
         }
-        var datanew = await axios.post("https://smartlockers.herokuapp.com/locker/updateuser", data)
+        var datanew = await axios.post("http://3.239.93.89:3001/locker/updateuser", data)
         console.log(datanew)
         if (datanew !== null) {
             window.location.reload()
@@ -163,21 +191,13 @@ const Dashboard = () => {
             name: lockerInfo.name,
             userstatus: "reserved",
         }
-        var datanew = await axios.post("https://smartlockers.herokuapp.com/locker/updateuser", data)
+        var datanew = await axios.post("http://3.239.93.89:3001/locker/updateuser", data)
         console.log(datanew)
         if (datanew !== null) {
             window.location.reload()
         }
     }
-    const indexOfLastPost = activePage * 12;
-    const indexOfFirstPost = indexOfLastPost - 12;
-    const currentPosts = DashboardInfo.slice(indexOfFirstPost, indexOfLastPost);
-    const pageNumbers = [];
-    // console.log(currentPosts);
-    
-    for (let i = 1; i <= Math.ceil(DashboardInfo.length / 12); i++) {
-        pageNumbers.push(i);
-    }
+
     return (
 
 
@@ -231,9 +251,9 @@ const Dashboard = () => {
                         </div>
                     </div>
                     : <div className="dashboard_RightbarBottom">
-                        <div style={{display:'flex',flexDirection:'column',alignItems:'center'}}>
-                        <div className="dashboard_lockerContainer">
-                         {(() => {
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <div className="dashboard_lockerContainer">
+                                {/* {(() => {
                                 if (currentPosts.length !== 0) {
                                     return (
                                         <>
@@ -258,52 +278,52 @@ const Dashboard = () => {
                                                 </button >
                                             })}
 
-x
+
 
                                         </>
 
                                     )
                                 }
-                            })()} 
-                            
+                            })()}  */}
 
-                            {/* {(() => {
-                                if (currentPosts.length !== 0) {
-                                    return (
-                                        <>
-                                            {currentPosts.map((values, key) => {
-                                             
-                                                return  <button className='dashboard_detailget'  key={key} data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                    onClick={() => setLockerInfodata(values)}>
-                                                    <div className={values.status === 1?'dashboard_lockerBox':'dashboard_lockerBox dashboard_lockerBox_open'}>
-                                                       {values.status === 1?<Icon icon="fa-solid:lock" className='dashboard_lockerIcon' id={values} />:
-                                                        <Icon style={{transform: 'scaleX(-1)',color:'red'}} icon="fa-solid:lock-open" data-flip="horizontal" className='dashboard_lockerIcon' id={values} />
-                                                       
-                                                       } 
-                                                       
-                                                        <h5>{`Locker ${values.id}`}</h5>
-                                                        
 
-                                                     
-                                                        <p style={{color:'white'}} key={key}>{values.status === 1 ?
-                                                        `Closed`:
-                                                        'Opened'}</p>
-                                                                        
-                                                                        {values.status === 1?<button type='button'
+                                {(() => {
+                                    if (currentPosts.length !== 0) {
+                                        return (
+                                            <>
+                                                {currentPosts.map((values, key) => {
+
+                                                    return <button className='dashboard_detailget' key={key} data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                        onClick={() => setLockerInfodata(values)}>
+                                                        <div className={values.status === 1 ? 'dashboard_lockerBox' : 'dashboard_lockerBox dashboard_lockerBox_open'}>
+                                                            {values.status === 1 ? <Icon icon="fa-solid:lock" className='dashboard_lockerIcon' id={values} /> :
+                                                                <Icon style={{ transform: 'scaleX(-1)', color: 'red' }} icon="fa-solid:lock-open" data-flip="horizontal" className='dashboard_lockerIcon' id={values} />
+
+                                                            }
+
+                                                            <h5>{`${values.name}`}</h5>
+
+
+
+                                                            <p style={{ color: 'white' }} key={key}>{values.status === 1 ?
+                                                                `Closed` :
+                                                                'Opened'}</p>
+
+                                                            {values.status === 1 ? <button type='button'
                                                                 className='openbtnnew'
-                                                                onClick={() => handleUnlock(values,values.id)}>Open</button>:null}
-                                                    </div>
-                                                </button >
-                                            })}
+                                                                onClick={() => handleUnlock(values, values.id)}>Open</button> : null}
+                                                        </div>
+                                                    </button >
+                                                })}
 
 
 
-                                        </>
+                                            </>
 
-                                    )
-                                }
-                            })()} 
-                         */}
+                                        )
+                                    }
+                                })()}
+
 
 
                                 {/* <div>
@@ -320,33 +340,39 @@ x
 
 
 
-                        </div>
-                        <div style={{margin:'0 0 0 120px'}}>
-                            <div className='row'>
-
-                            <ul className='pagination'>
-                                {pageNumbers.map(number => (
-                                    <li key={number} className={`page-item ${activePage === number ? "active" : ""}`} style={{ cursor: "pointer" }}>
-                                        <span onClick={() => setactivePage(number)} className='page-link'>
-                                            {number}
-                                        </span>
-                                    </li>
-                                ))}
-                            </ul>
                             </div>
-                        </div>
+                            <div style={{ margin: '0 0 0 120px' }}>
+                                <div className='row'>
+
+                                    <ul className='pagination'>
+                                        {pageNumbers.map(number => (
+                                            <li key={number} className={`page-item ${activePage === number ? "active" : ""}`} style={{ cursor: "pointer" }}>
+                                                <span onClick={() => setactivePage(number)} className='page-link'>
+                                                    {number}
+                                                </span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
 
                         <div className='dashboard_lockerInfo'>
                             <h3>Occupied locker details</h3>
-                            <div className="dashboard_lockerInfoTop">
-                                <Icon icon="bx:bxs-lock" className='dashboard_lockerImg' id={lockerInfo.status} />
-                                <div className="dashboard_locker_details">
-                                    <p>{lockerInfo.name}</p>
-                                    <p>{lockerInfo.status}</p>
-                                </div>
-                            </div>
+                           {/*  */}
                             {lockeruserdata.length !== 0 ?
+                                <>
+                                <div className="dashboard_lockerInfoTop">
+                                {/* <Icon icon="bx:bxs-lock" className='dashboard_lockerImg' id={lockerInfo.status} /> */}
+                                {lockerInfo.status === 1 ? <Icon icon="fa-solid:lock" className='dashboard_lockerIcon dashboard_lockerImg'   id={lockerInfo.status}/> :
+                                                                <Icon style={{ transform: 'scaleX(-1)', color: 'red' }} icon="fa-solid:lock-open" data-flip="horizontal" className='dashboard_lockerIcon dashboard_lockerImg'  id={lockerInfo.status} />
+
+                                                            }
+                                <div className="dashboard_locker_details">
+                                    <p style={{marginBottom:"0"}}>{lockerInfo.name}</p>
+                                    <p style={{marginBottom:"0"}}>{lockerInfo.status===0?'opened':'closed'}</p>
+                                </div>
+                                </div>
                                 <div className="dashboard_lockerInfo_details">
                                     <img className="dashboard_profileImg" src="./assets/profile.png" alt="" />
                                     <div className='dashboard_lockerInfo_detailsdiv'>
@@ -372,7 +398,7 @@ x
                                     <div className='dashboard_lockerInfo_detailsdiv'>
                                         <button className='adminCtrl_lockerInfo_Button' onClick={removeuser}>Release User</button>
                                     </div>
-                                </div> : null}
+                                </div> </>: null}
 
                         </div>
                     </div>}

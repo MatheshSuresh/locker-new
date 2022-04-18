@@ -17,8 +17,8 @@ const AdminCtrl = () => {
 
     const getInfo = async () => {
         try {
-            const { data } = await axios.get('https://smartlockers.herokuapp.com/locker/lockerdata');
-            const users = await axios.get('https://smartlockers.herokuapp.com/user/check');
+            const { data } = await axios.get('http://3.239.93.89:3001/locker/lockerdata');
+            const users = await axios.get('http://3.239.93.89:3001/user/check');
             setUserdata(users.data)
             setDashboarddata(data);
         } catch (err) {
@@ -28,18 +28,20 @@ const AdminCtrl = () => {
 
 
     const unlock = async () => {
-        // await axios.post("https://smartlockers.herokuapp.com/locker/unlock", DashboardInfo[0]);
+        // await axios.post("http://3.239.93.89:3001/locker/unlock", DashboardInfo[0]);
         console.log(locker);
-        let set = await axios.get(`https://smartlockers.herokuapp.com/machineStatus/?ip=192.168.0.7&port=23&type=operate&address=${locker}`);
+        //124.123.67.202:8084/
+        let set = await axios.get(`http://3.239.93.89:3001/openLock/?ip=124.123.67.202&port=8084&type=operate&address=${locker}`);
         console.log(set)
     }
 
     const unlockAll = async () => {
         console.log(Dashboarddata);
         for (let i = 0; i < Dashboarddata.length; i++) {
-            // await axios.post("https://smartlockers.herokuapp.com/locker/unlock", Dashboarddata[i]);
+            // await axios.post("http://3.239.93.89:3001/locker/unlock", Dashboarddata[i]);
             console.log(Dashboarddata[i].locker_address);
-            await axios.get(`https://smartlockers.herokuapp.com/machineStatus/?ip=192.168.0.7&port=23&type=operate&address=${Dashboarddata[i].locker_address}`);
+            // http://3.239.93.89:3001/machineStatus/?ip=124.123.67.202&port=8084&type=status&address=1
+            await axios.get(`http://3.239.93.89:3001/openLock/?ip=124.123.67.202&port=8084&type=operate&address=${Dashboarddata[i].locker_address}`);
         }
     }
 
@@ -62,7 +64,7 @@ const AdminCtrl = () => {
             key: key,
             user: user
         }
-        var addlockerdata = await axios.post(`https://smartlockers.herokuapp.com/locker/insertlocker`, data).then((res) => { return res.data })
+        var addlockerdata = await axios.post(`http://3.239.93.89:3001/locker/insertlocker`, data).then((res) => { return res.data })
         if (addlockerdata !== null) {
             window.location.reload()
         }
@@ -86,13 +88,13 @@ const AdminCtrl = () => {
         // var user = document.getElementById("useredit").value
         var data = {
             name: lockername,
-            status: status,
-            subscribe_topic: subtopic,
-            publish_topic: pubtopic,
+            ip_address: status,
+            port_address: subtopic,
+            locker_address: pubtopic,
             key: key,
             // user: user
         }
-        var addlockerdata = await axios.post(`https://smartlockers.herokuapp.com/locker/updatealldata`, data).then((res) => { return res.data })
+        var addlockerdata = await axios.post(`http://3.239.93.89:3001/locker/updatealldata`, data).then((res) => { return res.data })
         if (addlockerdata !== null) {
             window.location.reload()
         }
@@ -102,7 +104,7 @@ const AdminCtrl = () => {
             name :editdata[0].name
         }
         console.log(data)
-        var addlockerdata = await axios.post(`https://smartlockers.herokuapp.com/locker/deletedata`, data).then((res) => { return res.data })
+        var addlockerdata = await axios.post(`http://3.239.93.89:3001/locker/deletedata`, data).then((res) => { return res.data })
         if (addlockerdata !== null) {
             window.location.reload()
         }

@@ -13,7 +13,7 @@ const Newpass = () => {
                 password:password,
                 email:"john@gmail.com"
             }
-            var newpassword = await axios.post(`https://smartlockers.herokuapp.com/user/update`,data).then((res)=>{return res.data})
+            var newpassword = await axios.post(`http://3.239.93.89:3001/user/update`,data).then((res)=>{return res.data})
             if(newpassword !==null){
                 window.location.replace("/")
             }

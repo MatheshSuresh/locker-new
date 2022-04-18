@@ -14,7 +14,7 @@ const Forgotpass = () => {
         setOtp(e.target.value)
     }
     const sendopt = async () => {
-        var user = await axios.get(`https://smartlockers.herokuapp.com/user/check`).then((res) => { return res.data })
+        var user = await axios.get(`http://3.239.93.89:3001/user/check`).then((res) => { return res.data })
         var checkuser = await user.filter((data) => { return data.email === email })
         if (checkuser.length !== 0) {
             var val = Math.floor(1000 + Math.random() * 9000);

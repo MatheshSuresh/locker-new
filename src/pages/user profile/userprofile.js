@@ -8,7 +8,7 @@ const Userprofile = () => {
     const [Dashboarddata, setDashboarddata] = useState("");
 
     const getInfo = async () => {
-        var user = await axios.get(`https://smartlockers.herokuapp.com/user/check`).then((res) => { return res.data })
+        var user = await axios.get(`http://3.239.93.89:3001/user/check`).then((res) => { return res.data })
         var adminuser = await user.filter((data) => { return data.role === "admin" })
         setDashboarddata(adminuser)
     }
@@ -26,7 +26,7 @@ const Userprofile = () => {
             password: password,
             role:'admin'
         }
-        var adduser = await axios.post("https://smartlockers.herokuapp.com/user/register", data).then((res) => { return res.data })
+        var adduser = await axios.post("http://3.239.93.89:3001/user/register", data).then((res) => { return res.data })
         console.log(adduser);
         alert(adduser.message)
         window.location.reload()
